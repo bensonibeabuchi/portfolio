@@ -17,20 +17,17 @@ export default function Project_bar() {
             <div className="flex items-center justify-between h-16">
               <div className="hidden md:block">
                 <div className="ml-4 flex items-center space-x-4">
-                  <ul className="flex gap-4 font-bold text-xl my-16 p-8">
-                    <Link href="/home" className="hover:bg-black hover:text-white rounded-lg hover:scale-110 p-2">
-                      <li className="hover:bg-black hover:text-white hover:scale-105 cursor-pointer p-4 rounded-lg">Full Stack projects</li>
-                    </Link>
-                    <Link href="/projects" className="hover:bg-black hover:text-white rounded-lg hover:scale-110 p-2">
+                  <ul className="flex gap-2 font-semibold text-lg my-16 p-4">
+                    <Link href="/projects#frontend" className="hover:bg-black hover:text-white rounded-lg hover:scale-110 p-2">
                       <li className="hover:bg-black hover:text-white hover:scale-105 cursor-pointer p-4 rounded-lg">Frontend Projects</li>
                     </Link>
-                    <Link href="/tech_stack" className="hover:bg-black hover:text-white rounded-lg hover:scale-110 p-2">
+                    <Link href="/projects#backend" className="hover:bg-black hover:text-white rounded-lg hover:scale-110 p-2">
                       <li className="hover:bg-black hover:text-white hover:scale-105 cursor-pointer p-4 rounded-lg">Backend Projects</li>
                     </Link>
-                    <Link href="/about" className="hover:bg-black hover:text-white rounded-lg hover:scale-110 p-2">
+                    <Link href="/projects#product" className="hover:bg-black hover:text-white rounded-lg hover:scale-110 p-2">
                       <li className="hover:bg-black hover:text-white hover:scale-105 cursor-pointer p-4 rounded-lg">Product Design projects</li>
                     </Link>
-                    <Link href="/contact" className="hover:bg-black hover:text-white rounded-lg hover:scale-110 p-2">
+                    <Link href="/projects#javascript" className="hover:bg-black hover:text-white rounded-lg hover:scale-110 p-2">
                       <li className="hover:bg-black hover:text-white hover:scale-105 cursor-pointer p-4 rounded-lg">Javascript projects</li>
                     </Link>
                   </ul>
@@ -58,19 +55,16 @@ export default function Project_bar() {
           {isClick && (
             <div className="md:hidden w-60 mx-auto">
               <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-black border rounded-lg shadow ">
-                <Link href="/">
-                  <p className="hover:bg-black hover:text-white hover:scale-105 cursor-pointer p-4 rounded-lg">Full Stack projects</p>
-                </Link>
-                <Link href="/">
+                <Link href="/projects#frontend">
                   <p className="hover:bg-black hover:text-white hover:scale-105 cursor-pointer p-4 rounded-lg">Frontend Projects</p>
                 </Link>
-                <Link href="/">
+                <Link href="/projects#backend">
                   <p className="hover:bg-black hover:text-white hover:scale-105 cursor-pointer p-4 rounded-lg">Backend Projects</p>
                 </Link>
-                <Link href="/">
+                <Link href="/projects#product">
                   <p className="hover:bg-black hover:text-white hover:scale-105 cursor-pointer p-4 rounded-lg">Product Design projects</p>
                 </Link>
-                <Link href="/">
+                <Link href="/projects#javascript">
                   <p className="hover:bg-black hover:text-white hover:scale-105 cursor-pointer p-4 rounded-lg">Javascript projects</p>
                 </Link>
               </div>

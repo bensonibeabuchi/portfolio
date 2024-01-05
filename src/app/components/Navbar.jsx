@@ -13,7 +13,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="py-8 sticky top-0 bg-[#f4f4f4]">
+      <nav className="py-8 sticky top-0 bg-[#f4f4f4] z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
