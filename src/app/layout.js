@@ -11,8 +11,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="bg-[#f4f4f4] font-[poppins] transition-all">
-        <div className="max-w-7xl mx-auto bg-[#f4f4f4]">{children}</div>
+      <body className={poppins.className}>
+        <div className="bg-[#f4f4f4] transition-all">
+          <div className="max-w-7xl font-[Poppins] mx-auto bg-[#f4f4f4]">{children}</div>
+        </div>
       </body>
     </html>
   );
