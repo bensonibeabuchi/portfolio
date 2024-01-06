@@ -34,23 +34,10 @@ export default function Home() {
         {/* Hero Section */}
         <div className="flex mt-24 p-16 justify-center space-x-36">
           <div className="space-y-2 my-auto">
-            <p className="text-base md:text-2xl font-bold">
-              Hello world, <br />
-            </p>
-            <p className="text-3xl md:text-5xl font-bold">
-              My name is
-              <br />
-            </p>
-            <p className="md:text-7xl text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#F5B613] to-[#E70F0F] ">
-              Benson Ibeabuchi
-              <br />
-            </p>
-            <p className="md:text-5xl text-3xl font-bold">
-              The fullstack Alchemist{" "}
-              <span className="sparkles hover:transition-all hover:rotate-45 hover:scale-110 cursor-pointer" role="button">
-                🪄
-              </span>
-            </p>
+            <p className="text-base md:text-2xl font-bold">Hello world,</p>
+            <p className="text-3xl md:text-5xl font-bold">My name is</p>
+            <p className="md:text-7xl text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#F5B613] to-[#E70F0F] ">Benson Ibeabuchi</p>
+            <p className="md:text-5xl text-3xl font-bold">The fullstack Alchemist 🪄</p>
           </div>
           <div className="hidden md:block">
             <Image src={hero_side} alt="code snippets" height="500" />
@@ -64,57 +51,53 @@ export default function Home() {
           <Project_bar />
           {/* Project Card */}
           <div className="md:flex space-y-10  gap-16">
-            <Link href="https://akwukwo.vercel.app/" target="_blank" className="cursor-pointer my-8">
-              <div className="w-[371px] h-[614px] p-4 rounded-xl shadow-2xl bg-white hover:scale-105 transition-all ">
-                <h1 className="font-semibold text-2xl mt-4">Akwukwo</h1>
-                <p className="font-light mb-3">An e-learning full stack project</p>
-                <div className="h-[215px] bg-red-400 overflow-hidden">
-                  <Image src={akw} alt="Akwukwo website" width={900} className="object-cover h-full w-full" />
-                </div>
-                <p className="bg-clip-text font-medium text-transparent bg-gradient-to-r from-[#13B0F5] to-[#E70FAA] inline-block mt-4">Tech Stack</p>
-                <p className="font-light text-sm text-gray-400 mb-2">HTML, Javascript, React, Next.js, TailwindCSS</p>
-                <p className="max-h-32 font-light text-sm line-clamp-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, incidunt, cum voluptas sint doloremque necessitatibus at expedita dolorem tenetur molestiae id velit nulla quod dignissimos laudantium dolorum corrupti rem nisi. Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, incidunt, cum voluptas sint doloremque necessitatibus at expedita dolorem tenetur molestiae id velit nulla quod dignissimos laudantium dolorum corrupti rem nisi.Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, incidunt, cum voluptas sint doloremque necessitatibus at expedita dolorem tenetur molestiae id velit nulla quod dignissimos laudantium dolorum corrupti rem nisi. Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, incidunt, cum voluptas sint doloremque necessitatibus at expedita dolorem tenetur molestiae id velit nulla quod dignissimos laudantium dolorum corrupti rem nisi.Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, incidunt, cum voluptas sint doloremque necessitatibus at expedita dolorem tenetur molestiae id velit nulla quod dignissimos laudantium dolorum corrupti rem nisi.</p>
-                <div className="bg-black rounded-lg w-2/4 items-center ">
-                  <Link href="https://akwukwo.vercel.app/" target="_blank" className="text-white justify-center flex p-3 my-4 cursor-pointer gap-2 items-center hover:bg-[#353535] hover:scale-105 hover:text-white rounded-md">
-                    <FaLink /> <p>Live Preview</p>
-                  </Link>
-                </div>
+            <div className="w-[371px] h-[614px] p-4 rounded-xl shadow-2xl bg-white hover:scale-105 transition-all ">
+              <h1 className="font-semibold text-2xl mt-4">Akwukwo</h1>
+              <p className="font-light mb-3">An e-learning full stack project</p>
+              <div className="h-[215px] bg-red-400 overflow-hidden">
+                <Image src={akw} alt="Akwukwo website" width={900} className="object-cover h-full w-full" />
               </div>
-            </Link>
-            <Link href="http://echo1-048a0f46d862.herokuapp.com/" target="_blank" className="cursor-pointer my-8">
-              <div className="w-[371px] h-[614px] p-4 rounded-xl shadow-2xl bg-white hover:scale-105 transition-all">
-                <h1 className="font-semibold text-2xl mt-4">Echo</h1>
-                <p className="font-light mb-3">A news sharing API</p>
-                <div className="h-[215px] bg-red-400 overflow-hidden">
-                  <Image src={echo} alt="Echo website" width={900} className="object-cover h-full w-full" />
-                </div>
-                <p className="bg-clip-text font-medium text-transparent bg-gradient-to-r from-[#13B0F5] to-[#E70FAA] inline-block mt-4">Tech Stack</p>
-                <p className="font-light text-sm text-gray-400 mb-2 truncate">Django, Python, Django RestFramework, Postgres</p>
-                <p className="max-h-32 font-light text-sm line-clamp-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, incidunt, cum voluptas sint doloremque necessitatibus at expedita dolorem tenetur molestiae id velit nulla quod dignissimos laudantium dolorum corrupti rem nisi. Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, incidunt, cum voluptas sint doloremque necessitatibus at expedita dolorem tenetur molestiae id velit nulla quod dignissimos laudantium dolorum corrupti rem nisi.Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, incidunt, cum voluptas sint doloremque necessitatibus at expedita dolorem tenetur molestiae id velit nulla quod dignissimos laudantium dolorum corrupti rem nisi. Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, incidunt, cum voluptas sint doloremque necessitatibus at expedita dolorem tenetur molestiae id velit nulla quod dignissimos laudantium dolorum corrupti rem nisi.Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, incidunt, cum voluptas sint doloremque necessitatibus at expedita dolorem tenetur molestiae id velit nulla quod dignissimos laudantium dolorum corrupti rem nisi.</p>
-                <div className="bg-black rounded-lg w-2/4 items-center ">
-                  <Link href="http://echo1-048a0f46d862.herokuapp.com/" target="_blank" className="text-white justify-center flex p-3 my-4 cursor-pointer gap-2 items-center hover:bg-[#353535] hover:scale-105 hover:text-white rounded-md">
-                    <FaLink /> <p>Live Preview</p>
-                  </Link>
-                </div>
+              <p className="bg-clip-text font-medium text-transparent bg-gradient-to-r from-[#13B0F5] to-[#E70FAA] inline-block mt-4">Tech Stack</p>
+              <p className="font-light text-sm text-gray-400 mb-2">HTML, Javascript, React, Next.js, TailwindCSS</p>
+              <p className="max-h-32 font-light text-sm line-clamp-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, incidunt, cum voluptas sint doloremque necessitatibus at expedita dolorem tenetur molestiae id velit nulla quod dignissimos laudantium dolorum corrupti rem nisi. Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, incidunt, cum voluptas sint doloremque necessitatibus at expedita dolorem tenetur molestiae id velit nulla quod dignissimos laudantium dolorum corrupti rem nisi.Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, incidunt, cum voluptas sint doloremque necessitatibus at expedita dolorem tenetur molestiae id velit nulla quod dignissimos laudantium dolorum corrupti rem nisi. Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, incidunt, cum voluptas sint doloremque necessitatibus at expedita dolorem tenetur molestiae id velit nulla quod dignissimos laudantium dolorum corrupti rem nisi.Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, incidunt, cum voluptas sint doloremque necessitatibus at expedita dolorem tenetur molestiae id velit nulla quod dignissimos laudantium dolorum corrupti rem nisi.</p>
+              <div className="bg-black rounded-lg w-2/4 items-center ">
+                <a href="https://akwukwo.vercel.app/" target="_blank" className="text-white justify-center flex p-3 my-4 cursor-pointer gap-2 items-center hover:bg-[#353535] hover:scale-105 hover:text-white rounded-md">
+                  <FaLink /> <p>Live Preview</p>
+                </a>
               </div>
-            </Link>
-            <Link href="/" target="_blank" className="cursor-pointer my-8">
-              <div className="w-[371px] h-[614px] p-4 rounded-xl shadow-2xl bg-white hover:scale-105 transition-all ">
-                <h1 className="font-semibold text-2xl mt-4">Stem</h1>
-                <p className="font-light mb-3">Budget and Expense Tracking Mobile Ap</p>
-                <div className="h-[215px] overflow-hidden">
-                  <Image src={stem} alt="Stem website" width={900} className="object-cover h-full w-full transition duration-1000 hover:animate-spin" />
-                </div>
-                <p className="bg-clip-text font-medium text-transparent bg-gradient-to-r from-[#13B0F5] to-[#E70FAA] inline-block mt-4">Tech Stack</p>
-                <p className="font-light text-sm text-gray-400 mb-2">UI/UX, Figma</p>
-                <p className="max-h-32 font-light text-sm line-clamp-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, incidunt, cum voluptas sint doloremque necessitatibus at expedita dolorem tenetur molestiae id velit nulla quod dignissimos laudantium dolorum corrupti </p>
-                <div className="bg-black rounded-lg w-2/4 items-center ">
-                  <Link href="/" className="text-white justify-center flex p-3 my-4 cursor-pointer gap-2 items-center hover:bg-[#353535] hover:scale-105 hover:text-white rounded-md">
-                    <FaLink /> <p>Live Preview</p>
-                  </Link>
-                </div>
+            </div>
+
+            <div className="w-[371px] h-[614px] p-4 rounded-xl shadow-2xl bg-white hover:scale-105 transition-all">
+              <h1 className="font-semibold text-2xl mt-4">Echo</h1>
+              <p className="font-light mb-3">A news sharing API</p>
+              <div className="h-[215px] bg-red-400 overflow-hidden">
+                <Image src={echo} alt="Echo website" width={900} className="object-cover h-full w-full" />
               </div>
-            </Link>
+              <p className="bg-clip-text font-medium text-transparent bg-gradient-to-r from-[#13B0F5] to-[#E70FAA] inline-block mt-4">Tech Stack</p>
+              <p className="font-light text-sm text-gray-400 mb-2 truncate">Django, Python, Django RestFramework, Postgres</p>
+              <p className="max-h-32 font-light text-sm line-clamp-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, incidunt, cum voluptas sint doloremque necessitatibus at expedita dolorem tenetur molestiae id velit nulla quod dignissimos laudantium dolorum corrupti rem nisi. Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, incidunt, cum voluptas sint doloremque necessitatibus at expedita dolorem tenetur molestiae id velit nulla quod dignissimos laudantium dolorum corrupti rem nisi.Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, incidunt, cum voluptas sint doloremque necessitatibus at expedita dolorem tenetur molestiae id velit nulla quod dignissimos laudantium dolorum corrupti rem nisi. Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, incidunt, cum voluptas sint doloremque necessitatibus at expedita dolorem tenetur molestiae id velit nulla quod dignissimos laudantium dolorum corrupti rem nisi.Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, incidunt, cum voluptas sint doloremque necessitatibus at expedita dolorem tenetur molestiae id velit nulla quod dignissimos laudantium dolorum corrupti rem nisi.</p>
+              <div className="bg-black rounded-lg w-2/4 items-center ">
+                <a href="http://echo1-048a0f46d862.herokuapp.com/" target="_blank" className="text-white justify-center flex p-3 my-4 cursor-pointer gap-2 items-center hover:bg-[#353535] hover:scale-105 hover:text-white rounded-md">
+                  <FaLink /> <p>Live Preview</p>
+                </a>
+              </div>
+            </div>
+
+            <div className="w-[371px] h-[614px] p-4 rounded-xl shadow-2xl bg-white hover:scale-105 transition-all ">
+              <h1 className="font-semibold text-2xl mt-4">Stem</h1>
+              <p className="font-light mb-3">Budget and Expense Tracking Mobile Ap</p>
+              <div className="h-[215px] overflow-hidden">
+                <Image src={stem} alt="Stem website" width={900} className="object-cover h-full w-full transition duration-1000 hover:animate-spin" />
+              </div>
+              <p className="bg-clip-text font-medium text-transparent bg-gradient-to-r from-[#13B0F5] to-[#E70FAA] inline-block mt-4">Tech Stack</p>
+              <p className="font-light text-sm text-gray-400 mb-2">UI/UX, Figma</p>
+              <p className="max-h-32 font-light text-sm line-clamp-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, incidunt, cum voluptas sint doloremque necessitatibus at expedita dolorem tenetur molestiae id velit nulla quod dignissimos laudantium dolorum corrupti </p>
+              <div className="bg-black rounded-lg w-2/4 items-center ">
+                <a href="/" className="text-white justify-center flex p-3 my-4 cursor-pointer gap-2 items-center hover:bg-[#353535] hover:scale-105 hover:text-white rounded-md">
+                  <FaLink /> <p>Live Preview</p>
+                </a>
+              </div>
+            </div>
           </div>
         </div>
 
