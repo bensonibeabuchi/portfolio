@@ -13,7 +13,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={poppins.className}>
         <div className="bg-[#f4f4f4] transition-all">
-          <div className="max-w-7xl font-[Poppins] mx-auto bg-[#f4f4f4]">{children}</div>
+          <div className="max-w-7xl mx-auto bg-[#f4f4f4]">{children}</div>
         </div>
       </body>
     </html>
