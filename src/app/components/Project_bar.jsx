@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
-import { FaBars, FaWindowClose, FaChevronDown } from "react-icons/fa";
+import { FaChevronDown } from "react-icons/fa";
 import { FaChevronUp } from "react-icons/fa6";
 
 export default function Project_bar() {

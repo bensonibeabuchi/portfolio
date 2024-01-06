@@ -1,11 +1,8 @@
 import React from "react";
 import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 import Image from "next/image";
-import benson from "../images/benson.jpg";
 import { FaGithub, FaLinkedin, FaTwitterSquare } from "react-icons/fa";
 import Link from "next/link";
-import profile from "../images/profile1.jpg";
 
 export default function About() {
   return (
@@ -16,7 +13,7 @@ export default function About() {
           <h1 className="md:text-5xl ml-7 text-3xl p-4 font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#13B0F5] to-[#E70FAA] inline-block">About Me</h1>
           <div className="flex space-x-8 p-4">
             <div className="hidden md:block w-1/4 overflow-clip h-[900px]">
-              <Image src={benson} width={2000} alt="my portrait" />
+              <Image src={"https://github.com/bensonibeabuchi/capstoneimages/blob/main/images/logo_mark.png?raw=true"} height={100} width={2000} alt="my portrait" />
             </div>
             <div className="md:w-3/4">
               <div className="md:ml-16">

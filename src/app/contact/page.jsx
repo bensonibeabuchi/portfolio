@@ -1,11 +1,8 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import Image from "next/image";
-import benson from "../images/benson.jpg";
 import { FaGithub, FaLinkedin, FaTwitterSquare } from "react-icons/fa";
 import Link from "next/link";
-import profile from "../images/profile1.jpg";
 
 export default function About() {
   return (

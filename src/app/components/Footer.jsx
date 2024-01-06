@@ -1,6 +1,5 @@
 import React from "react";
 import Image from "next/image";
-import logo from "../images/logo.png";
 import { FaGithub, FaLinkedin, FaTwitterSquare } from "react-icons/fa";
 import Link from "next/link";
 
@@ -8,7 +7,7 @@ export default function Footer() {
   return (
     <div className="mx-auto p-8 items-center flex flex-col justify-center">
       <div className="flex flex-col justify-center text-center items-center">
-        <Image src={logo} alt="logo" className="m-4" />
+        <Image src={"https://github.com/bensonibeabuchi/capstoneimages/blob/main/images/logo_mark.png?raw=true"} width={20} height={50} alt="logo" className="m-4" />
         <p>
           Designed and built by <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#13B0F5] to-[#E70FAA]">Benson Ibeabuchi</span>
         </p>

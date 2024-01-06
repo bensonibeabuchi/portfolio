@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import benson_logo from "../images/benson_logo.png";
 import { FaBars, FaWindowClose } from "react-icons/fa";
 
 export default function Navbar() {
@@ -19,7 +18,7 @@ export default function Navbar() {
             <div className="flex items-center">
               <div className="flex-shrink-0 ">
                 <Link href="/">
-                  <Image src={benson_logo} alt="logo" width="250" className="m-8 cursor-pointer" />
+                  <Image src={"https://github.com/bensonibeabuchi/capstoneimages/blob/main/images/benson_logo.png?raw=true"} height={100} alt="logo" width="250" className="m-8 cursor-pointer" />
                 </Link>
               </div>
             </div>

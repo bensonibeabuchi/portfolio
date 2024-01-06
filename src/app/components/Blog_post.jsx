@@ -1,6 +1,5 @@
 import React from "react";
 import Image from "next/image";
-import benson from "../images/tailwind.png";
 
 export default function Blog_post() {
   return (
@@ -8,7 +7,7 @@ export default function Blog_post() {
       <div className="md:flex justify-center mx-auto items-center my-16">
         <div>
           <div className="md:w-[421px] w-[325px] h-[268px] md:h-[350px] overflow-hidden justify-center items-center mx-auto rounded-xl">
-            <Image src={benson} width={2000} alt="my portrait" className="scale-150 object-cover h-full w-full " />
+            <Image src={"https://github.com/bensonibeabuchi/capstoneimages/blob/main/images/tailwind.png?raw=true"} height={100} width={2000} alt="my portrait" className="scale-150 object-cover h-full w-full " />
           </div>
         </div>
         <div className="flex justify-center">
