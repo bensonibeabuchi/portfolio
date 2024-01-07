@@ -7,10 +7,10 @@ import { FaLink } from "react-icons/fa6";
 export default function Project_Card() {
   return (
     <>
-      <div className="w-[371px] md:h-[614px] p-4 rounded-xl shadow-2xl bg-white hover:scale-105 transition-all mx-auto overflow-clip mb-16 ">
+      <div className="md:w-[371px] w-[330px] md:h-[614px] p-4 rounded-xl shadow-2xl bg-white hover:scale-105 transition-all mx-auto overflow-clip mb-16">
         <h1 className="font-semibold md:text-2xl text-xl mt-4">Akwukwo</h1>
         <p className="font-light text-xs md:text-base mb-3">An e-learning full stack project</p>
-        <div className="h-[215px] bg-red-400 overflow-hidden">
+        <div className="h-[215px] overflow-hidden">
           <Image src={"https://github.com/bensonibeabuchi/capstoneimages/blob/main/images/akw.png?raw=true"} height={100} alt="Akwukwo website" width={900} className="object-cover h-full w-full" />
         </div>
         {/* <p className="bg-clip-text text-sm md:text-base font-medium text-transparent bg-gradient-to-r from-[#13B0F5] to-[#E70FAA] inline-block mt-4">Tech Stack</p> */}

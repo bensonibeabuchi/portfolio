@@ -19,7 +19,7 @@ export default function Home() {
             <p className="text-base md:text-2xl font-bold">Hello world,</p>
             <p className="text-3xl md:text-5xl font-bold">My name is</p>
             <p className="md:text-7xl text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#F5B613] to-[#E70F0F] ">Benson Ibeabuchi</p>
-            <p className="md:text-5xl text-3xl font-bold">The fullstack Alchemist 🪄</p>
+            <p className="md:text-5xl text-3xl font-bold">The fullstack alchemist 🪄</p>
           </div>
           <div className="hidden md:block">
             <Image src={"https://github.com/bensonibeabuchi/capstoneimages/blob/main/images/hero_side.png?raw=true"} width={500} alt="code snippets" height="500" />
@@ -33,7 +33,7 @@ export default function Home() {
           <Project_bar />
           {/* Project Card */}
           <div className="md:flex gap-16">
-            <div className="w-[371px] h-[614px] p-4 rounded-xl shadow-2xl bg-white hover:scale-105 transition-all mb-16 ">
+            <div className="md:w-[371px] w-[330px] md:h-[614px] p-4 rounded-xl shadow-2xl bg-white hover:scale-105 transition-all mx-auto overflow-clip mb-16 ">
               <h1 className="font-semibold text-2xl mt-4">Akwukwo</h1>
               <p className="font-light mb-3">An e-learning full stack project</p>
               <div className="h-[215px] bg-red-400 overflow-hidden">
@@ -49,7 +49,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="w-[371px] h-[614px] p-4 rounded-xl shadow-2xl bg-white hover:scale-105 transition-all mb-16">
+            <div className="md:w-[371px] w-[330px] md:h-[614px] p-4 rounded-xl shadow-2xl bg-white hover:scale-105 transition-all mx-auto overflow-clip mb-16 ">
               <h1 className="font-semibold text-2xl mt-4">Echo</h1>
               <p className="font-light mb-3">A news sharing API</p>
               <div className="h-[215px] bg-red-400 overflow-hidden">
@@ -65,21 +65,21 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="w-[371px] h-[614px] p-4 rounded-xl shadow-2xl bg-white hover:scale-105 transition-all mb-16 ">
-              <h1 className="font-semibold text-2xl mt-4">Stem</h1>
-              <p className="font-light mb-3">Budget and Expense Tracking Mobile Ap</p>
+            <div className="md:w-[371px] w-[330px] md:h-[614px] p-4 rounded-xl shadow-2xl bg-white hover:scale-105 transition-all mx-auto overflow-clip mb-16 ">
+              <h1 className="font-semibold md:text-2xl text-xl mt-4">Stem</h1>
+              <p className="font-light text-xs md:text-base mb-3">Budget and Expense Tracking Mobile App</p>
               <div className="h-[215px] overflow-hidden">
-                <Image src={"https://github.com/bensonibeabuchi/capstoneimages/blob/main/images/stem.png?raw=true"} height={100} alt="Stem website" width={900} className="object-cover h-full w-full transition duration-1000 hover:animate-spin" />
+                <Image src={"https://github.com/bensonibeabuchi/capstoneimages/blob/main/images/stem.png?raw=true"} height={100} alt="Stem design" width={900} className="object-cover h-full w-full hover:animate-spin " />
               </div>
-              {/* <p className="bg-clip-text font-medium text-transparent bg-gradient-to-r from-[#13B0F5] to-[#E70FAA] inline-block mt-4">Tech Stack</p> */}
+              {/* <p className="bg-clip-text text-sm md:text-base font-medium text-transparent bg-gradient-to-r from-[#13B0F5] to-[#E70FAA] inline-block mt-4">Tech Stack</p> */}
               <p className="bg-clip-text font-medium text-transparent bg-gradient-to-r from-[#13B0F5] to-[#E70FAA] inline-block mt-4">UI/UX, Figma</p>
               <p className="max-h-32 font-light text-sm line-clamp-5">Stem is the ultimate Budget and Expense Tracking mobile app designed in Figma. Streamline your financial journey with a minimalist and intuitive interface crafted to perfection.</p>
               <div className="bg-black rounded-lg w-2/4 items-center ">
-                <a href="/" className="text-white justify-center flex p-3 my-4 cursor-pointer gap-2 items-center hover:bg-[#353535] hover:scale-105 hover:text-white rounded-md">
+                <a href="https://akwukwo.vercel.app/" target="_blank" className="text-white justify-center flex p-3 my-4 cursor-pointer gap-2 items-center hover:bg-[#353535] hover:scale-105 hover:text-white rounded-md">
                   <FaLink /> <p>Live Preview</p>
                 </a>
               </div>
-            </div>
+          </div>
           </div>
         </div>
 
@@ -87,21 +87,21 @@ export default function Home() {
         <div>
           <div className="justify-center mt-32 mb-32 items-center flex flex-col">
             <h1 className="md:text-5xl text-3xl t p-4 font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#13B0F5] to-[#E70FAA] inline-block">My Tech Stack</h1>
-            <p className="text-sm md:text-base">Technologies I have been working with recently</p>
-            <div className=" md:space-y-24 space-y-8 my-6">
-              <div className="flex md:gap-16 gap-4 md:my-8 p-4">
-                <Image src={"https://github.com/bensonibeabuchi/capstoneimages/blob/main/images/html.png?raw=true"} alt="html logo" width={70} height={50} className="md:h-40 md:w-40 mt-4 hover:scale-110 transition-all cursor-pointer" />
-                <Image src={"https://github.com/bensonibeabuchi/capstoneimages/blob/main/images/css.png?raw=true"} alt="css logo" width={70} height={50} className="md:h-40 md:w-40 mt-4 hover:scale-110 transition-all cursor-pointer" />
-                <Image src={"https://github.com/bensonibeabuchi/capstoneimages/blob/main/images/javascript.png?raw=true"} alt="javascript logo" width={70} height={50} className="md:h-40 md:w-40 mt-4 hover:scale-110 transition-all cursor-pointer" />
-                <Image src={"https://github.com/bensonibeabuchi/capstoneimages/blob/main/images/react.png?raw=true"} alt="react logo" width={70} height={50} className="md:h-40 md:w-40 mt-4 transition-all duration-1000 hover:animate-spin cursor-pointer" />
-                <Image src={"https://raw.githubusercontent.com/bensonibeabuchi/capstoneimages/dc012faadbe0e69685cf5a8df8dfe85cfed41278/images/nextjs.svg"} alt="nextjs logo" width={70} height={50} className="md:h-40 md:w-40  mt-4 hover:scale-110 transition-all cursor-pointer" />
+            <p className="text-xs md:text-base">Technologies I have been working with recently</p>
+            <div className="md:space-y-16 space-y-2 my-6">
+              <div className="flex md:gap-16 gap-2 md:my-8 p-4">
+                <Image src={"https://github.com/bensonibeabuchi/capstoneimages/blob/main/images/html.png?raw=true"} alt="html logo" width={50} height={50} className="md:h-40 md:w-40 mt-4 hover:scale-110 transition-all cursor-pointer" />
+                <Image src={"https://github.com/bensonibeabuchi/capstoneimages/blob/main/images/css.png?raw=true"} alt="css logo" width={50} height={50} className="md:h-40 md:w-40 mt-4 hover:scale-110 transition-all cursor-pointer" />
+                <Image src={"https://github.com/bensonibeabuchi/capstoneimages/blob/main/images/javascript.png?raw=true"} alt="javascript logo" width={50} height={50} className="md:h-40 md:w-40 mt-4 hover:scale-110 transition-all cursor-pointer" />
+                <Image src={"https://github.com/bensonibeabuchi/capstoneimages/blob/main/images/react.png?raw=true"} alt="react logo" width={50} height={50} className="md:h-40 md:w-40 mt-4 transition-all duration-1000 hover:animate-spin cursor-pointer" />
+                <Image src={"https://raw.githubusercontent.com/bensonibeabuchi/capstoneimages/dc012faadbe0e69685cf5a8df8dfe85cfed41278/images/nextjs.svg"} alt="nextjs logo" width={50} height={50} className="md:h-40 md:w-40  mt-4 hover:scale-110 transition-all cursor-pointer" />
               </div>
-              <div className="flex md:gap-16 gap-4 md:my-16 p-4">
-                <Image src={"https://github.com/bensonibeabuchi/capstoneimages/blob/main/images/github.png?raw=true"} alt="Github logo" width={70} height={50} className="md:h-40 md:w-40 mt-4 hover:scale-110 transition-all cursor-pointer" />
-                <Image src={"https://github.com/bensonibeabuchi/capstoneimages/blob/main/images/tailwindlogo.png?raw=true"} alt="Tailwind logo" width={70} height={50} className="md:h-40 md:w-40 mt-4 hover:scale-110 transition-all cursor-pointer" />
-                <Image src={"https://github.com/bensonibeabuchi/capstoneimages/blob/main/images/Python.png?raw=true"} alt="Python logo" width={70} height={50} className="md:h-40 md:w-40 mt-4 hover:scale-110 transition-all cursor-pointer" />
-                <Image src={"https://github.com/bensonibeabuchi/capstoneimages/blob/main/images/Django.png?raw=true"} alt="Django logo" width={70} height={50} className="md:h-40 md:w-40 mt-4 hover:scale-110 transition-all cursor-pointer" />
-                <Image src={"https://github.com/bensonibeabuchi/capstoneimages/blob/main/images/drf.png?raw=true"} alt="DRF logo" width={70} height={50} className="md:h-40 md:w-40 mt-4 hover:scale-110 transition-all cursor-pointer" />
+              <div className="flex md:gap-16 gap-2 md:my-16 p-4">
+                <Image src={"https://github.com/bensonibeabuchi/capstoneimages/blob/main/images/github.png?raw=true"} alt="Github logo" width={50} height={50} className="md:h-40 md:w-40 mt-4 hover:scale-110 transition-all cursor-pointer" />
+                <Image src={"https://github.com/bensonibeabuchi/capstoneimages/blob/main/images/tailwindlogo.png?raw=true"} alt="Tailwind logo" width={50} height={50} className="md:h-40 md:w-40 mt-4 hover:scale-110 transition-all cursor-pointer" />
+                <Image src={"https://github.com/bensonibeabuchi/capstoneimages/blob/main/images/Python.png?raw=true"} alt="Python logo" width={50} height={50} className="md:h-40 md:w-40 mt-4 hover:scale-110 transition-all cursor-pointer" />
+                <Image src={"https://github.com/bensonibeabuchi/capstoneimages/blob/main/images/Django.png?raw=true"} alt="Django logo" width={50} height={50} className="md:h-40 md:w-40 mt-4 hover:scale-110 transition-all cursor-pointer" />
+                <Image src={"https://github.com/bensonibeabuchi/capstoneimages/blob/main/images/drf.png?raw=true"} alt="DRF logo" width={50} height={50} className="md:h-40 md:w-40 mt-4 hover:scale-110 transition-all cursor-pointer" />
               </div>
             </div>
           </div>

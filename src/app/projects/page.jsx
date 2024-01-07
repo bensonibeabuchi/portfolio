@@ -13,13 +13,13 @@ export default function Projects() {
       <Navbar />
 
       {/* Javascript mini projects */}
-      <div id="javascript" className="mt-16">
+      <div id="javascript" className="mt-16 justify-center">
         <h1 className="md:text-5xl text-3xl p-4 font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#13B0F5] to-[#E70FAA] inline-block">Javascript Mini Projects</h1>
-        <div className="md:flex gap-16 items-center justify-center p-8">
-          <div className="w-[371px] md:h-[614px] p-4 rounded-xl shadow-2xl bg-white hover:scale-105 transition-all mx-auto overflow-clip mb-16 ">
+        <div className="md:flex gap-16 items-center justify-center p-4">
+          <div className="md:w-[371px] w-[330px] md:h-[614px] p-4 rounded-xl shadow-2xl bg-white hover:scale-105 transition-all mx-auto overflow-clip mb-16">
             <h1 className="font-semibold md:text-2xl text-xl mt-4">CGPA Calculator</h1>
             <p className="font-light text-xs md:text-base mb-3 truncate">A Cummulative grade point average calculator</p>
-            <div className="h-[215px] bg-red-400 overflow-hidden">
+            <div className="h-[215px] overflow-hidden">
               <Image src={"https://github.com/bensonibeabuchi/capstoneimages/blob/main/images/cgpa.png?raw=true"} alt="CGPA calculator" width={900} height={100} className="object-cover h-full w-full" />
             </div>
             {/* <p className="bg-clip-text text-sm md:text-base font-medium text-transparent bg-gradient-to-r from-[#13B0F5] to-[#E70FAA] inline-block mt-4">Tech Stack</p> */}
@@ -31,10 +31,10 @@ export default function Projects() {
               </Link>
             </div>
           </div>
-          <div className="w-[371px] md:h-[614px] p-4 rounded-xl shadow-2xl bg-white hover:scale-105 transition-all mx-auto overflow-clip mb-16 ">
+          <div className="md:w-[371px] w-[330px] md:h-[614px] p-4 rounded-xl shadow-2xl bg-white hover:scale-105 transition-all mx-auto overflow-clip mb-16">
             <h1 className="font-semibold md:text-2xl text-xl mt-4">Password Generator</h1>
             <p className="font-light text-xs md:text-base mb-3 truncate">An app to generate unbreakbale password whenever you need it</p>
-            <div className="h-[215px] bg-red-400 overflow-hidden">
+            <div className="h-[215px] overflow-hidden">
               <Image src={"https://github.com/bensonibeabuchi/capstoneimages/blob/main/images/pgenerator.png?raw=true"} height={300} alt="Password Generator" width={900} className="object-cover h-full w-full" />
             </div>
             {/* <p className="bg-clip-text text-sm md:text-base font-medium text-transparent bg-gradient-to-r from-[#13B0F5] to-[#E70FAA] inline-block mt-4">Tech Stack</p> */}
@@ -46,10 +46,10 @@ export default function Projects() {
               </Link>
             </div>
           </div>
-          <div className="w-[371px] md:h-[614px] p-4 rounded-xl shadow-2xl bg-white hover:scale-105 transition-all mx-auto overflow-clip mb-16 ">
+          <div className="md:w-[371px] w-[330px] md:h-[614px] p-4 rounded-xl shadow-2xl bg-white hover:scale-105 transition-all mx-auto overflow-clip mb-16">
             <h1 className="font-semibold md:text-2xl text-xl mt-4">BMI Calculator</h1>
             <p className="font-light text-xs md:text-base mb-3 truncate">Body Mass Index calculator developed using JS</p>
-            <div className="h-[215px] bg-red-400 overflow-hidden">
+            <div className="h-[215px] overflow-hidden">
               <Image src={"https://github.com/bensonibeabuchi/capstoneimages/blob/main/images/BMI.png?raw=true"} alt="BMI website" height={100} width={900} className="object-cover h-full w-full" />
             </div>
             {/* <p className="bg-clip-text text-sm md:text-base font-medium text-transparent bg-gradient-to-r from-[#13B0F5] to-[#E70FAA] inline-block mt-4">Tech Stack</p> */}
@@ -67,11 +67,11 @@ export default function Projects() {
       {/* Backend projects */}
       <div id="backend" className="mt-16">
         <h1 className="md:text-5xl text-3xl p-4 font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#13B0F5] to-[#E70FAA] inline-block">Backend Projects</h1>
-        <div className="md:flex gap-16 items-center justify-center p-8">
-          <div className="w-[371px] md:h-[614px] p-4 rounded-xl shadow-2xl bg-white hover:scale-105 transition-all mx-auto overflow-clip mb-16 ">
+        <div className="md:flex gap-16 items-center justify-center p-4">
+          <div className="md:w-[371px] w-[330px] md:h-[614px] p-4 rounded-xl shadow-2xl bg-white hover:scale-105 transition-all mx-auto overflow-clip mb-16">
             <h1 className="font-semibold md:text-2xl text-xl mt-4">Echo</h1>
             <p className="font-light text-xs md:text-base mb-3 truncate">A news sharing webapp with API endpoints</p>
-            <div className="h-[215px] bg-red-400 overflow-hidden">
+            <div className="h-[215px] overflow-hidden">
               <Image src={"https://github.com/bensonibeabuchi/capstoneimages/blob/main/images/echo.png?raw=true"} height={100} alt="Echo website" width={900} className="object-cover h-full w-full" />
             </div>
             {/* <p className="bg-clip-text text-sm md:text-base font-medium text-transparent bg-gradient-to-r from-[#13B0F5] to-[#E70FAA] inline-block mt-4">Tech Stack</p> */}
@@ -83,10 +83,10 @@ export default function Projects() {
               </Link>
             </div>
           </div>
-          <div className="w-[371px] md:h-[614px] p-4 rounded-xl shadow-2xl bg-white hover:scale-105 transition-all mx-auto overflow-clip mb-16 ">
+          <div className="md:w-[371px] w-[330px] md:h-[614px] p-4 rounded-xl shadow-2xl bg-white hover:scale-105 transition-all mx-auto overflow-clip mb-16">
             <h1 className="font-semibold md:text-2xl text-xl mt-4">Nexus</h1>
             <p className="font-light text-xs md:text-base mb-3 truncate">A CRM web app</p>
-            <div className="h-[215px] bg-red-400 overflow-hidden">
+            <div className="h-[215px] overflow-hidden">
               <Image src={"https://github.com/bensonibeabuchi/capstoneimages/blob/main/images/nexus_logo.png?raw=true"} height={100} alt="Nexus website" width={900} className="object-cover h-full w-full" />
             </div>
             {/* <p className="bg-clip-text text-sm md:text-base font-medium text-transparent bg-gradient-to-r from-[#13B0F5] to-[#E70FAA] inline-block mt-4">Tech Stack</p> */}
@@ -98,10 +98,10 @@ export default function Projects() {
               </Link>
             </div>
           </div>
-          <div className="w-[371px] md:h-[614px] p-4 rounded-xl shadow-2xl bg-white hover:scale-105 transition-all mx-auto overflow-clip mb-16 ">
+          <div className="md:w-[371px] w-[330px] md:h-[614px] p-4 rounded-xl shadow-2xl bg-white hover:scale-105 transition-all mx-auto overflow-clip mb-16">
             <h1 className="font-semibold md:text-2xl text-xl mt-4">Dossier</h1>
             <p className="font-light text-xs md:text-base mb-3 truncate">A task manager</p>
-            <div className="h-[215px] bg-red-400 overflow-hidden">
+            <div className="h-[215px] overflow-hidden">
               <Image src={"https://raw.githubusercontent.com/bensonibeabuchi/capstoneimages/dc012faadbe0e69685cf5a8df8dfe85cfed41278/images/dossier.svg"} height={100} alt="Dossier website" width={900} className="object-cover h-full w-full" />
             </div>
             {/* <p className="bg-clip-text text-sm md:text-base font-medium text-transparent bg-gradient-to-r from-[#13B0F5] to-[#E70FAA] inline-block mt-4">Tech Stack</p> */}
@@ -118,11 +118,11 @@ export default function Projects() {
       {/* Product design projects */}
       <div id="product" className="mt-16">
         <h1 className="md:text-5xl text-3xl p-4 font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#13B0F5] to-[#E70FAA] inline-block">Product Design Projects</h1>
-        <div className="md:flex gap-16 items-center justify-center p-8">
-          <div className="w-[371px] md:h-[614px] p-4 rounded-xl shadow-2xl bg-white hover:scale-105 transition-all mx-auto overflow-clip mb-16 ">
+        <div className="md:flex gap-16 items-center justify-center p-4">
+          <div className="md:w-[371px] w-[330px] md:h-[614px] p-4 rounded-xl shadow-2xl bg-white hover:scale-105 transition-all mx-auto overflow-clip mb-16">
             <h1 className="font-semibold md:text-2xl text-xl mt-4">Stem</h1>
             <p className="font-light text-xs md:text-base mb-3">Budget and Expense Tracking Mobile App</p>
-            <div className="h-[215px] bg-red-400 overflow-hidden">
+            <div className="h-[215px] overflow-hidden">
               <Image src={"https://github.com/bensonibeabuchi/capstoneimages/blob/main/images/stem.png?raw=true"} height={100} alt="Stem design" width={900} className="object-cover h-full w-full" />
             </div>
             {/* <p className="bg-clip-text text-sm md:text-base font-medium text-transparent bg-gradient-to-r from-[#13B0F5] to-[#E70FAA] inline-block mt-4">Tech Stack</p> */}
@@ -134,10 +134,10 @@ export default function Projects() {
               </Link>
             </div>
           </div>
-          <div className="w-[371px] md:h-[614px] p-4 rounded-xl shadow-2xl bg-white hover:scale-105 transition-all mx-auto overflow-clip mb-16 ">
+          <div className="md:w-[371px] w-[330px] md:h-[614px] p-4 rounded-xl shadow-2xl bg-white hover:scale-105 transition-all mx-auto overflow-clip mb-16">
             <h1 className="font-semibold md:text-2xl text-xl mt-4">Chowly</h1>
             <p className="font-light text-xs md:text-base mb-3">Food ordering and delivery app</p>
-            <div className="h-[215px] bg-red-400 overflow-hidden">
+            <div className="h-[215px] overflow-hidden">
               <Image src={"https://github.com/bensonibeabuchi/capstoneimages/blob/main/images/chowly.png?raw=true"} height={100} alt="Chowly Design" width={900} className="object-cover h-full w-full" />
             </div>
             {/* <p className="bg-clip-text text-sm md:text-base font-medium text-transparent bg-gradient-to-r from-[#13B0F5] to-[#E70FAA] inline-block mt-4">Tech Stack</p> */}
@@ -149,10 +149,10 @@ export default function Projects() {
               </Link>
             </div>
           </div>
-          <div className="w-[371px] md:h-[614px] p-4 rounded-xl shadow-2xl bg-white hover:scale-105 transition-all mx-auto overflow-clip mb-16 ">
+          <div className="md:w-[371px] w-[330px] md:h-[614px] p-4 rounded-xl shadow-2xl bg-white hover:scale-105 transition-all mx-auto overflow-clip mb-16">
             <h1 className="font-semibold md:text-2xl text-xl mt-4">Slack</h1>
             <p className="font-light text-xs md:text-base mb-3">A redesign of Slack Homepage</p>
-            <div className="h-[215px] bg-red-400 overflow-hidden">
+            <div className="h-[215px] overflow-hidden">
               <Image src={"https://github.com/bensonibeabuchi/capstoneimages/blob/main/images/slack.png?raw=true"} height={100} alt="Slack Redesign" width={900} className="object-cover h-full w-full" />
             </div>
             {/* <p className="bg-clip-text text-sm md:text-base font-medium text-transparent bg-gradient-to-r from-[#13B0F5] to-[#E70FAA] inline-block mt-4">Tech Stack</p> */}
@@ -170,7 +170,7 @@ export default function Projects() {
       {/* Frontend projects */}
       <div id="frontend" className="mt-16">
         <h1 className="md:text-5xl text-3xl p-4 font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#13B0F5] to-[#E70FAA] inline-block">Frontend Projects</h1>
-        <div className="md:flex gap-16 items-center justify-center p-8">
+        <div className="md:flex gap-16 items-center justify-center p-4">
           <Product_Card />
           <Product_Card />
           <Product_Card />
