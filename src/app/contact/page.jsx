@@ -31,7 +31,7 @@ export default function About() {
                 </a>
               </div>
             </div>
-            <div className="md:w-[1000px]">
+            <div className="md:w-[1000px] w-[300px]">
               <form action="https://formspree.io/f/mleqearp" method="POST" className="flex flex-col space-y-8 bg-[#1d1d1d] rounded-lg p-8 text-white">
                 <label htmlFor="name">Name</label>
                 <input type="text" name="name" id="name" className="p-4 text-black" />
