@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import Link from "next/link";
 import Image from "next/image";
 import { FaBars, FaWindowClose } from "react-icons/fa";
 
@@ -17,32 +16,32 @@ export default function Navbar() {
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
               <div className="flex-shrink-0 ">
-                <Link href="/">
-                  <Image src={"https://github.com/bensonibeabuchi/capstoneimages/blob/main/images/benson_logo.png?raw=true"} height={100} alt="logo" width="250" className="m-8 cursor-pointer" />
-                </Link>
+                <a href="/">
+                  <Image src={"https://github.com/bensonibeabuchi/capstoneimages/blob/main/images/benson_logo.png?raw=true"} height={100} alt="logo" width={200} className="m-8 cursor-pointer" />
+                </a>
               </div>
             </div>
             <div className="hidden md:block">
               <div className="ml-4 flex items-center space-x-4">
                 <ul className="flex gap-2">
-                  <Link href="/home" className="hover:bg-black hover:text-white rounded-lg hover:scale-110 p-2">
+                  <a href="/home" className="hover:bg-black hover:text-white rounded-lg hover:scale-110 p-2">
                     <li>Home</li>
-                  </Link>
-                  <Link href="/projects" className="hover:bg-black hover:text-white rounded-lg hover:scale-110 p-2">
+                  </a>
+                  <a href="/projects" className="hover:bg-black hover:text-white rounded-lg hover:scale-110 p-2">
                     <li>Projects</li>
-                  </Link>
-                  <Link href="/tech_stack" className="hover:bg-black hover:text-white rounded-lg hover:scale-110 p-2">
+                  </a>
+                  <a href="/tech_stack" className="hover:bg-black hover:text-white rounded-lg hover:scale-110 p-2">
                     <li>Tech Stack</li>
-                  </Link>
-                  <Link href="/about" className="hover:bg-black hover:text-white rounded-lg hover:scale-110 p-2">
+                  </a>
+                  <a href="/about" className="hover:bg-black hover:text-white rounded-lg hover:scale-110 p-2">
                     <li>About</li>
-                  </Link>
-                  <Link href="/contact" className="hover:bg-black hover:text-white rounded-lg hover:scale-110 p-2">
+                  </a>
+                  <a href="/contact" className="hover:bg-black hover:text-white rounded-lg hover:scale-110 p-2">
                     <li>Contact</li>
-                  </Link>
-                  <Link href="/blog" className="hover:bg-black hover:text-white rounded-lg hover:scale-110 p-2">
+                  </a>
+                  <a href="/blog" className="hover:bg-black hover:text-white rounded-lg hover:scale-110 p-2">
                     <li>Blog</li>
-                  </Link>
+                  </a>
                 </ul>
               </div>
             </div>
@@ -56,24 +55,24 @@ export default function Navbar() {
         {isClick && (
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 ">
-              <Link href="/home" className="hover:bg-black block hover:text-white rounded-lg p-2 ml-8">
+              <a href="/home" className="hover:bg-black block hover:text-white rounded-lg p-2 ml-8">
                 <p>Home</p>
-              </Link>
-              <Link href="/projects" className="hover:bg-black block hover:text-white rounded-lg p-2 ml-8">
+              </a>
+              <a href="/projects" className="hover:bg-black block hover:text-white rounded-lg p-2 ml-8">
                 <p>Projects</p>
-              </Link>
-              <Link href="/tech_stack" className="hover:bg-black block hover:text-white rounded-lg p-2 ml-8">
+              </a>
+              <a href="/tech_stack" className="hover:bg-black block hover:text-white rounded-lg p-2 ml-8">
                 <p>Tech Stack</p>
-              </Link>
-              <Link href="/about" className="hover:bg-black block hover:text-white rounded-lg p-2 ml-8">
+              </a>
+              <a href="/about" className="hover:bg-black block hover:text-white rounded-lg p-2 ml-8">
                 <p>About</p>
-              </Link>
-              <Link href="/contact" className="hover:bg-black block hover:text-white rounded-lg p-2 ml-8">
+              </a>
+              <a href="/contact" className="hover:bg-black block hover:text-white rounded-lg p-2 ml-8">
                 <p>Contact</p>
-              </Link>
-              <Link href="/blog" className="hover:bg-black block hover:text-white rounded-lg p-2 ml-8">
+              </a>
+              <a href="/blog" className="hover:bg-black block hover:text-white rounded-lg p-2 ml-8">
                 <p>Blog</p>
-              </Link>
+              </a>
             </div>
           </div>
         )}
