@@ -93,22 +93,22 @@ export default function Projects() {
             <p className="bg-clip-text font-medium text-transparent bg-gradient-to-r from-[#13B0F5] to-[#E70FAA] inline-block mt-4">Django, Postgres, HTML, CSS</p>
             <p className="hidden md:block max-h-32 font-light text-sm line-clamp-5">Nexus, a robust business solution built on the solid foundation of Django, with a user-friendly interface crafted in HTML and CSS. Our platform is designed to elevate your customer relationship management experience, ensuring seamless interactions and efficient workflow.</p>
             <div className="bg-black rounded-lg w-2/4 items-center ">
-              <Link href="/" target="_blank" className="text-white justify-center flex p-3 my-4 cursor-pointer gap-2 items-center hover:bg-[#353535] hover:scale-105 hover:text-white rounded-md">
+              <Link href="https://akalibe.vercel.app/" target="_blank" className="text-white justify-center flex p-3 my-4 cursor-pointer gap-2 items-center hover:bg-[#353535] hover:scale-105 hover:text-white rounded-md">
                 <FaLink /> <p>Live Preview</p>
               </Link>
             </div>
           </div>
           <div className="md:w-[371px] w-[330px] md:h-[614px] p-4 rounded-xl shadow-2xl bg-white hover:scale-105 transition-all mx-auto overflow-clip mb-16">
-            <h1 className="font-semibold md:text-2xl text-xl mt-4">Dossier</h1>
-            <p className="font-light text-xs md:text-base mb-3 truncate">A task manager</p>
+            <h1 className="font-semibold md:text-2xl text-xl mt-4">Akalibe</h1>
+            <p className="font-light text-xs md:text-base mb-3 truncate">An ecommerce fashion store</p>
             <div className="h-[215px] overflow-hidden">
-              <Image src={"https://raw.githubusercontent.com/bensonibeabuchi/capstoneimages/dc012faadbe0e69685cf5a8df8dfe85cfed41278/images/dossier.svg"} height={100} alt="Dossier website" width={900} className="object-cover h-full w-full" />
+              <Image src={"https://github.com/bensonibeabuchi/capstoneimages/blob/main/images/akalibe.png?raw=true"} height={100} alt="Dossier website" width={900} className="object-cover h-full w-full" />
             </div>
             {/* <p className="bg-clip-text text-sm md:text-base font-medium text-transparent bg-gradient-to-r from-[#13B0F5] to-[#E70FAA] inline-block mt-4">Tech Stack</p> */}
-            <p className="bg-clip-text font-medium text-transparent bg-gradient-to-r from-[#13B0F5] to-[#E70FAA] inline-block mt-4">Django, Postgres, HTML, TailwindCSS</p>
-            <p className="hidden md:block max-h-32 font-light text-sm line-clamp-5">Dossier is a Task Manager developed with Django, HTML and Tailwind CSS. This powerful trio forms the backbone of a seamless and efficient task management experience.</p>
+            <p className="bg-clip-text font-medium text-transparent bg-gradient-to-r from-[#13B0F5] to-[#E70FAA] inline-block mt-4">Python, Django, HTML, TailwindCSS</p>
+            <p className="hidden md:block max-h-32 font-light text-sm line-clamp-5">A virtual marketplace built with the robust Python Django framework, brought to life with HTML, and styled with Tailwind CSS. Immerse yourself in a seamless shopping experience where technology meets style.</p>
             <div className="bg-black rounded-lg w-2/4 items-center ">
-              <Link href="/" target="_blank" className="text-white justify-center flex p-3 my-4 cursor-pointer gap-2 items-center hover:bg-[#353535] hover:scale-105 hover:text-white rounded-md">
+              <Link href="https://akalibe.vercel.app/" target="_blank" className="text-white justify-center flex p-3 my-4 cursor-pointer gap-2 items-center hover:bg-[#353535] hover:scale-105 hover:text-white rounded-md">
                 <FaLink /> <p>Live Preview</p>
               </Link>
             </div>
