@@ -102,7 +102,7 @@ export default function Projects() {
             <h1 className="font-semibold md:text-2xl text-xl mt-4">Akalibe</h1>
             <p className="font-light text-xs md:text-base mb-3 truncate">An ecommerce fashion store</p>
             <div className="h-[215px] overflow-hidden">
-              <Image src={"https://github.com/bensonibeabuchi/capstoneimages/blob/main/images/akalibe.png?raw=true"} height={100} alt="Dossier website" width={900} className="object-cover h-full w-full" />
+              <Image src={"https://github.com/bensonibeabuchi/capstoneimages/blob/main/images/akalibe.png?raw=true"} height={100} alt="Akalibe website" width={900} className="object-cover h-full w-full" />
             </div>
             {/* <p className="bg-clip-text text-sm md:text-base font-medium text-transparent bg-gradient-to-r from-[#13B0F5] to-[#E70FAA] inline-block mt-4">Tech Stack</p> */}
             <p className="bg-clip-text font-medium text-transparent bg-gradient-to-r from-[#13B0F5] to-[#E70FAA] inline-block mt-4">Python, Django, HTML, TailwindCSS</p>
