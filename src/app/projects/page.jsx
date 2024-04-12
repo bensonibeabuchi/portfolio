@@ -78,7 +78,7 @@ export default function Projects() {
             <p className="bg-clip-text font-medium text-transparent bg-gradient-to-r from-[#13B0F5] to-[#E70FAA] inline-block mt-4">Python, DJango, Django RestFramework, Postgres</p>
             <p className="hidden md:block max-h-32 font-light text-sm line-clamp-5">ECHO News API is your gateway to the latest and most relevant news, seamlessly delivered through a Django-powered platform. Developed with Django and Django Rest Framework for robust backend functionality, and styled with Tailwind CSS, our API offers a comprehensive and user friendly news experience.</p>
             <div className="bg-black rounded-lg w-2/4 items-center ">
-              <Link href="http://echo1-048a0f46d862.herokuapp.com/" target="_blank" className="text-white justify-center flex p-3 my-4 cursor-pointer gap-2 items-center hover:bg-[#353535] hover:scale-105 hover:text-white rounded-md">
+              <Link href="https://echo-news.up.railway.app/" target="_blank" className="text-white justify-center flex p-3 my-4 cursor-pointer gap-2 items-center hover:bg-[#353535] hover:scale-105 hover:text-white rounded-md">
                 <FaLink /> <p>Live Preview</p>
               </Link>
             </div>
