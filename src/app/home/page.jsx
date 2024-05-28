@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Image from "next/image";
+import zlide from "../../../public/images/zlide.png";
 
 import { FaLink } from "react-icons/fa6";
 
@@ -32,7 +33,42 @@ export default function Home() {
           <p>Find below some projects I have built</p>
           <Project_bar />
           {/* Project Card */}
-          <div className="md:flex gap-16">
+          <div className="gap-16 grid lg:grid-cols-3 md:grid-cols-2">
+
+          <div className="md:w-[371px] w-[330px] md:h-[614px] p-4 rounded-xl shadow-2xl bg-white hover:scale-105 transition-all mx-auto overflow-clip mb-16 ">
+              <h1 className="font-semibold md:text-2xl text-xl mt-4">Zlide</h1>
+              <p className="font-light text-xs md:text-base mb-3">AI Pitch Deck maker</p>
+              <div className="h-[215px] overflow-hidden">
+                <Image src={zlide} height={100} alt="Zlide Website" width={900} className="object-cover h-full w-full" />
+              </div>
+              {/* <p className="bg-clip-text text-sm md:text-base font-medium text-transparent bg-gradient-to-r from-[#13B0F5] to-[#E70FAA] inline-block mt-4">Tech Stack</p> */}
+              <p className="bg-clip-text font-medium text-transparent bg-gradient-to-r from-[#13B0F5] to-[#E70FAA] inline-block mt-4">Python, Django, Nextjs, Redux, RTK Query</p>
+              <p className="max-h-32 font-light text-sm line-clamp-5">A webapp that creates a presentation/Pitch deck for you in seconds with the help of ai. You can also download the presentation to your device in Powerpoint format and it is fully customizable</p>
+              <div className="bg-black rounded-lg w-2/4 items-center ">
+                <a href="https://zlide-ben.vercel.app/" target="_blank" className="text-white justify-center flex p-3 my-4 cursor-pointer gap-2 items-center hover:bg-[#353535] hover:scale-105 hover:text-white rounded-md">
+                  <FaLink /> <p>Live Preview</p>
+                </a>
+              </div>
+            </div>
+
+            <div className="md:w-[371px] w-[330px] md:h-[614px] p-4 rounded-xl shadow-2xl bg-white hover:scale-105 transition-all mx-auto overflow-clip mb-16 ">
+              <h1 className="font-semibold text-2xl mt-4">Echo</h1>
+              <p className="font-light mb-3">A webapp that get&apos;s Live news from All over the world</p>
+              <div className="h-[215px] bg-red-400 overflow-hidden">
+                <Image src={"https://github.com/bensonibeabuchi/capstoneimages/blob/main/images/echo.png?raw=true"} height={100} alt="Echo website" width={900} className="object-cover h-full w-full" />
+              </div>
+              {/* <p className="bg-clip-text font-medium text-transparent bg-gradient-to-r from-[#13B0F5] to-[#E70FAA] inline-block mt-4">Tech Stack</p> */}
+              <p className="bg-clip-text font-medium text-transparent bg-gradient-to-r from-[#13B0F5] to-[#E70FAA] inline-block mt-4">Django, Python, Django RestFramework, Postgres</p>
+              <p className="max-h-32 font-light text-sm line-clamp-5">ECHO News API is your gateway to the latest and most relevant news, seamlessly delivered through a Django-powered platform. Developed with Django and Django Rest Framework for robust backend functionality, and styled with Tailwind CSS, our API offers a comprehensive and user friendly news experience.</p>
+              <div className="bg-black rounded-lg w-2/4 items-center ">
+                <a href="https://echo-news.up.railway.app/" target="_blank" className="text-white justify-center flex p-3 my-4 cursor-pointer gap-2 items-center hover:bg-[#353535] hover:scale-105 hover:text-white rounded-md">
+                  <FaLink /> <p>Live Preview</p>
+                </a>
+              </div>
+            </div>
+
+
+
             <div className="md:w-[371px] w-[330px] md:h-[614px] p-4 rounded-xl shadow-2xl bg-white hover:scale-105 transition-all mx-auto overflow-clip mb-16 ">
               <h1 className="font-semibold text-2xl mt-4">Akwukwo</h1>
               <p className="font-light mb-3">An e-learning full stack project</p>
@@ -48,22 +84,8 @@ export default function Home() {
                 </a>
               </div>
             </div>
-
-            <div className="md:w-[371px] w-[330px] md:h-[614px] p-4 rounded-xl shadow-2xl bg-white hover:scale-105 transition-all mx-auto overflow-clip mb-16 ">
-              <h1 className="font-semibold text-2xl mt-4">Echo</h1>
-              <p className="font-light mb-3">A news sharing API</p>
-              <div className="h-[215px] bg-red-400 overflow-hidden">
-                <Image src={"https://github.com/bensonibeabuchi/capstoneimages/blob/main/images/echo.png?raw=true"} height={100} alt="Echo website" width={900} className="object-cover h-full w-full" />
-              </div>
-              {/* <p className="bg-clip-text font-medium text-transparent bg-gradient-to-r from-[#13B0F5] to-[#E70FAA] inline-block mt-4">Tech Stack</p> */}
-              <p className="bg-clip-text font-medium text-transparent bg-gradient-to-r from-[#13B0F5] to-[#E70FAA] inline-block mt-4">Django, Python, Django RestFramework, Postgres</p>
-              <p className="max-h-32 font-light text-sm line-clamp-5">ECHO News API is your gateway to the latest and most relevant news, seamlessly delivered through a Django-powered platform. Developed with Django and Django Rest Framework for robust backend functionality, and styled with Tailwind CSS, our API offers a comprehensive and user friendly news experience.</p>
-              <div className="bg-black rounded-lg w-2/4 items-center ">
-                <a href="https://echo-news.up.railway.app/" target="_blank" className="text-white justify-center flex p-3 my-4 cursor-pointer gap-2 items-center hover:bg-[#353535] hover:scale-105 hover:text-white rounded-md">
-                  <FaLink /> <p>Live Preview</p>
-                </a>
-              </div>
-            </div>
+            
+          
 
             <div className="md:w-[371px] w-[330px] md:h-[614px] p-4 rounded-xl shadow-2xl bg-white hover:scale-105 transition-all mx-auto overflow-clip mb-16 ">
               <h1 className="font-semibold md:text-2xl text-xl mt-4">Akalibe</h1>
@@ -80,7 +102,7 @@ export default function Home() {
                   <FaLink /> <p>Live Preview</p>
                 </a>
               </div>
-          </div>
+            </div>
           </div>
         </div>
 
