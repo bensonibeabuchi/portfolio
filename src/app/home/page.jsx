@@ -32,6 +32,7 @@ export default function Home() {
           <h1 className="text-5xl p-4 font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#13B0F5] to-[#E70FAA] inline-block">Projects</h1>
           <p>Find below some projects I have built</p>
           <Project_bar />
+          
           {/* Project Card */}
           <div className="gap-16 grid lg:grid-cols-3 md:grid-cols-2">
 
@@ -66,8 +67,6 @@ export default function Home() {
                 </a>
               </div>
             </div>
-
-
 
             <div className="md:w-[371px] w-[330px] md:h-[614px] p-4 rounded-xl shadow-2xl bg-white hover:scale-105 transition-all mx-auto overflow-clip mb-16 ">
               <h1 className="font-semibold text-2xl mt-4">Akwukwo</h1>
