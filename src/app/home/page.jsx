@@ -15,16 +15,15 @@ export default function Home() {
 
       <div>
         {/* Hero Section */}
-        <div className="flex mt-24 p-16 justify-center space-x-32">
-          <div className="space-y-2 my-auto">
-            <p className="text-base md:text-2xl font-bold">Hello world,</p>
-            <p className="text-3xl md:text-5xl font-bold">My name is</p>
-            <p className="md:text-7xl text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#F5B613] to-[#E70F0F] ">Benson Ibeabuchi</p>
-            <p className="md:text-5xl text-3xl font-bold">The fullstack alchemist 🪄</p>
+        <div className="flex mt-24 mx-auto items-center justify-center text-center">
+          <div className="text-wrap">
+            {/* <p className="text-base md:text-2xl font-bold">Hi, I am</p> */}
+            <p className="md:text-[156px] text-3xl font-bold bg-clip-text text-transparent leading-none bg-gradient-to-r from-[#F5B613] to-[#E70F0F]"><span className="text-black">I am</span>Benson Ibeabuchi</p>
+            <p className="md:text-5xl text-3xl font-bold mt-8">The fullstack developer 💻</p>
           </div>
-          <div className="hidden md:block">
+          {/* <div className="hidden md:block">
             <Image src={"https://github.com/bensonibeabuchi/capstoneimages/blob/main/images/hero_side.png?raw=true"} width={500} alt="code snippets" height="500" />
-          </div>
+          </div> */}
         </div>
 
         {/* Project Section */}
