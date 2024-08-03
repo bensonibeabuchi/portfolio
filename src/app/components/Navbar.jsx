@@ -39,9 +39,9 @@ export default function Navbar() {
                   <a href="/contact" className="hover:bg-black hover:text-white rounded-lg hover:scale-110 p-2">
                     <li>Contact</li>
                   </a>
-                  <a href="/blog" className="hover:bg-black hover:text-white rounded-lg hover:scale-110 p-2">
+                  {/* <a href="/blog" className="hover:bg-black hover:text-white rounded-lg hover:scale-110 p-2">
                     <li>Blog</li>
-                  </a>
+                  </a> */}
                 </ul>
               </div>
             </div>
