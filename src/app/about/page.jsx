@@ -19,9 +19,12 @@ export default function About() {
               <div className="md:ml-16">
                 <div className="my-8 space-y-4">
                   <h2 className="font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#13B0F5] to-[#E70FAA] inline-block">PROFESSIONAL SUMMARY</h2>
-                  <p className="leading-loose">A Fullstack Developer with a passion for solving complex problems through technology, specializing in HTML, CSS, Tailwind CSS, JavaScript, React.js, Next.js, Python, Django, ORM, Django Rest Framework, Figma, UI/UX designs, and React Native for mobile development. Committed to creating user-centric solutions that bridge the gap between technology and real-world issues.</p>
-                </div>
+                  <p className="leading-loose">
+                  My journey into the world of tech is fueled by a strong foundation in storytelling and visual arts as a documentary filmmaker and photojournalist. This unique perspective enriches my approach to software development, where I strive to blend creativity with technical proficiency to build impactful and user-friendly applications. Transitioning from visual storytelling to full stack development has been a leap of faith, and I am excited to bring my multidisciplinary skills to the tech industry.
 
+                  A Fullstack Developer, specializing in HTML, Tailwind CSS, JavaScript, React.js, Next.js, Python, Django, Django Rest Framework, UI/UX designs, and React Native for mobile development.
+                  </p>
+                </div>
 
                 {/* TECHNICAL SKILLS  */}
                 <div className="my-8 space-y-4">
@@ -33,7 +36,8 @@ export default function About() {
                       <li><span className="font-bold"> Backend Development: </span> Django</li>
                       <li><span className="font-bold">Mobile App Development:</span> React Native</li>
                       <li><span className="font-bold">Database Management:</span> Postgres</li>
-                      <li><span className="font-bold">Version Control:</span> Git/GitHub</li>
+                      <li><span className="font-bold">Project Management</span></li>
+                      <li><span className="font-bold">UI Design:</span>Figma</li>
                     </div>
                   </div>
                 </div>
@@ -43,11 +47,11 @@ export default function About() {
                   <h2 className="font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#13B0F5] to-[#E70FAA] inline-block">EDUCATION</h2>
                   <div>
                     <li className="indent-8"> <span className="font-bold"> Bachelor of Technology in Financial Management </span> - Federal University of Technology Owerri, 2014</li>
-                    <p className="font-semibold">Certifications</p>
+                    <p className="font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#13B0F5] to-[#E70FAA] inline-block">Certifications</p>
                     <div className="indent-8">
                       <li className="text-blue-400 hover:cursor-pointer underline"> <a href="https://coursera.org/verify/specialization/DND6JKVHC4DL" target="_blank">Meta React Native Specialization Course by Meta, 2024</a> </li>
                       <li className="text-blue-400 hover:cursor-pointer underline"> <a href="https://coursera.org/verify/UEGCUQL347YU" target="_blank">Meta Django Web Framework Course, 2024</a> </li>
-                      <li className="text-blue-400 hover:cursor-pointer underline"> <a href="https://coursera.org/verify/B9QKXL3XDFR6" target="_blank">Meta Principles of UX/UI Design, 2024</a> </li>
+                      <li className="text-blue-400 hover:cursor-pointer underline"> <a href="https://www.credly.com/badges/c2698a86-5782-4a26-a776-8a535c1e9b47/public_url" target="_blank">Meta Front-End Developer Professional Certificate, 2024</a> </li>
                       <li className="text-blue-400 hover:cursor-pointer underline"> <a href="https://coursera.org/verify/XFXWU89QXTKE" target="_blank">Meta Programming with Javascript, 2024</a> </li>
                       <li className="text-blue-400 hover:cursor-pointer underline"> <a href="https://entrylevel-public.s3.amazonaws.com/certificate/3f59ede6-c7b4-419c-a4ac-8c3201c00a56/b4a61a59-510a-4b78-a9db-52e4710f282a_cert.pdf" target="_blank">UX Designer, EntryLevel 2023</a> </li>
                       <li>Frontend Development - Univelcity, 2023 </li>
@@ -96,15 +100,15 @@ export default function About() {
                   <h2 className="font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#13B0F5] to-[#E70FAA] inline-block">SOCIAL MEDIA</h2>
                   <div>
                     <div className="flex gap-4">
-                      <Link href="https://www.linkedin.com/in/bensonibeabuchi/" target="_blank">
+                      <Link href="https://www.linkedin.com/in/benson-ugochukwu-ibeabuchi/" target="_blank">
                         <FaLinkedin className="h-8 w-8 mt-4" />
                       </Link>
                       <Link href="https://github.com/bensonibeabuchi" target="_blank">
                         <FaGithub className="h-8 w-8 mt-4" />
                       </Link>
-                      <Link href="https://twitter.com/bensonIbeabuchi" target="_blank">
+                      {/* <Link href="https://twitter.com/bensonIbeabuchi" target="_blank">
                         <FaTwitterSquare className="h-8 w-8 mt-4" />
-                      </Link>
+                      </Link> */}
                     </div>
                   </div>
                 </div>
