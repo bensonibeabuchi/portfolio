@@ -167,7 +167,7 @@ export default function Projects() {
             <p className="bg-clip-text font-medium text-transparent bg-gradient-to-r from-[#13B0F5] to-[#E70FAA] inline-block mt-4">Django, Postgres, HTML, CSS</p>
             <p className="hidden md:block max-h-32 font-light text-sm line-clamp-5">Nexus, a robust business solution built on the solid foundation of Django, with a user-friendly interface crafted in HTML and CSS. Our platform is designed to elevate your customer relationship management experience, ensuring seamless interactions and efficient workflow.</p>
             <div className="bg-black rounded-lg w-2/4 items-center ">
-              <Link href="https://akalibe.vercel.app/" target="_blank" className="text-white justify-center flex p-3 my-4 cursor-pointer gap-2 items-center hover:bg-[#353535] hover:scale-105 hover:text-white rounded-md">
+              <Link href="https://nexus-kappa-one.vercel.app/" target="_blank" className="text-white justify-center flex p-3 my-4 cursor-pointer gap-2 items-center hover:bg-[#353535] hover:scale-105 hover:text-white rounded-md">
                 <FaLink /> <p>Live Preview</p>
               </Link>
             </div>
@@ -205,7 +205,7 @@ export default function Projects() {
             <p className="bg-clip-text font-medium text-transparent bg-gradient-to-r from-[#13B0F5] to-[#E70FAA] inline-block mt-4">UI/UX, Figma</p>
             <p className="hidden md:block max-h-32 font-light text-sm line-clamp-5">Stem is the ultimate Budget and Expense Tracking mobile app designed in Figma. Streamline your financial journey with a minimalist and intuitive interface crafted to perfection.</p>
             <div className="bg-black rounded-lg w-2/4 items-center ">
-              <Link href="https://akwukwo.vercel.app/" target="_blank" className="text-white justify-center flex p-3 my-4 cursor-pointer gap-2 items-center hover:bg-[#353535] hover:scale-105 hover:text-white rounded-md">
+              <Link href="https://dribbble.com/shots/24630741-Stem-Budget-and-expense-tracking-mobile-app" target="_blank" className="text-white justify-center flex p-3 my-4 cursor-pointer gap-2 items-center hover:bg-[#353535] hover:scale-105 hover:text-white rounded-md">
                 <FaLink /> <p>Live Preview</p>
               </Link>
             </div>
@@ -220,22 +220,22 @@ export default function Projects() {
             <p className="bg-clip-text font-medium text-transparent bg-gradient-to-r from-[#13B0F5] to-[#E70FAA] inline-block mt-4">UI/UX, Figma</p>
             <p className="hidden md:block max-h-32 font-light text-sm line-clamp-5">Indulge your taste buds with our Food Ordering App, a culinary journey brought to life through the artful design of Figma. Immerse yourself in a visually enticing experience, where every detail is meticulously crafted to enhance your food exploration.</p>
             <div className="bg-black rounded-lg w-2/4 items-center ">
-              <Link href="https://akwukwo.vercel.app/" target="_blank" className="text-white justify-center flex p-3 my-4 cursor-pointer gap-2 items-center hover:bg-[#353535] hover:scale-105 hover:text-white rounded-md">
+              <Link href="https://dribbble.com/shots/24630847-chowly" target="_blank" className="text-white justify-center flex p-3 my-4 cursor-pointer gap-2 items-center hover:bg-[#353535] hover:scale-105 hover:text-white rounded-md">
                 <FaLink /> <p>Live Preview</p>
               </Link>
             </div>
           </div>
           <div className="md:w-[371px] w-[330px] md:h-[614px] p-4 rounded-xl shadow-2xl bg-white hover:scale-105 transition-all mx-auto overflow-clip mb-16">
-            <h1 className="font-semibold md:text-2xl text-xl mt-4">Slack</h1>
-            <p className="font-light text-xs md:text-base mb-3">A redesign of Slack Homepage</p>
+            <h1 className="font-semibold md:text-2xl text-xl mt-4">Akalibe Redesign</h1>
+            <p className="font-light text-xs md:text-base mb-3">An ecommerce website focused on silk dresses</p>
             <div className="h-[215px] overflow-hidden">
-              <Image src={"https://github.com/bensonibeabuchi/capstoneimages/blob/main/images/slack.png?raw=true"} height={100} alt="Slack Redesign" width={900} className="object-cover h-full w-full" />
+              <Image src={"https://github.com/bensonibeabuchi/capstoneimages/blob/main/images/akalibe.png?raw=true"} height={100} alt="Akalibe ecommerce" width={900} className="object-cover h-full w-full" />
             </div>
             {/* <p className="bg-clip-text text-sm md:text-base font-medium text-transparent bg-gradient-to-r from-[#13B0F5] to-[#E70FAA] inline-block mt-4">Tech Stack</p> */}
             <p className="bg-clip-text font-medium text-transparent bg-gradient-to-r from-[#13B0F5] to-[#E70FAA] inline-block mt-4">UI/UX, Figma</p>
-            <p className="hidden md:block max-h-32 font-light text-sm line-clamp-5">This is just a slack redesign on Figma showing my design skills</p>
+            <p className="hidden md:block max-h-32 font-light text-sm line-clamp-5">Immerse yourself in a seamless shopping experience focused on silk dresses where technology meets style.</p>
             <div className="bg-black rounded-lg w-2/4 items-center ">
-              <Link href="https://akwukwo.vercel.app/" target="_blank" className="text-white justify-center flex p-3 my-4 cursor-pointer gap-2 items-center hover:bg-[#353535] hover:scale-105 hover:text-white rounded-md">
+              <Link href="https://www.figma.com/proto/lQNZTXlMt5OEna4sEIWNDI/AKalibe-webapp?node-id=165-88&t=XwACghcGXfeVdazp-1" target="_blank" className="text-white justify-center flex p-3 my-4 cursor-pointer gap-2 items-center hover:bg-[#353535] hover:scale-105 hover:text-white rounded-md">
                 <FaLink /> <p>Live Preview</p>
               </Link>
             </div>
