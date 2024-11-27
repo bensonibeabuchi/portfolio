@@ -148,7 +148,7 @@ export default function Home() {
             <p className="text-xs md:text-base">Technologies I have been working with recently</p>
             <div className="md:space-y-16 space-y-2 my-6">
               <div className="flex md:gap-16 gap-2 md:my-8 p-4">
-                <Image src={"https://github.com/bensonibeabuchi/capstoneimages/blob/main/images/html.png?raw=true"} alt="html logo" width={50} height={50} className="md:h-40 md:w-40 mt-4 hover:scale-110 transition-all cursor-pointer" />
+                <Image src={"https://raw.githubusercontent.com/bensonibeabuchi/capstoneimages/refs/heads/main/images/expo-icon.svg"} alt="html logo" width={50} height={50} className="md:h-40 md:w-40 mt-4 hover:scale-110 transition-all cursor-pointer" />
                 <Image src={"https://github.com/bensonibeabuchi/capstoneimages/blob/main/images/css.png?raw=true"} alt="css logo" width={50} height={50} className="md:h-40 md:w-40 mt-4 hover:scale-110 transition-all cursor-pointer" />
                 <Image src={"https://github.com/bensonibeabuchi/capstoneimages/blob/main/images/javascript.png?raw=true"} alt="javascript logo" width={50} height={50} className="md:h-40 md:w-40 mt-4 hover:scale-110 transition-all cursor-pointer" />
                 <Image src={"https://github.com/bensonibeabuchi/capstoneimages/blob/main/images/react.png?raw=true"} alt="react logo" width={50} height={50} className="md:h-40 md:w-40 mt-4 transition-all duration-1000 hover:animate-spin cursor-pointer" />

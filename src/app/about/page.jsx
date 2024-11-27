@@ -29,12 +29,12 @@ export default function About() {
                   <h2 className="font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#13B0F5] to-[#E70FAA] inline-block">TECHNICAL SKILLS</h2>
                   <div className="indent-8 leading-loose">
                     <div className="">
-                      <li className=""> <span className="font-bold">Programming Languages:</span> Python, JavaScript</li>
+                      <li className=""> <span className="font-bold">Programming Languages:</span> Python, JavaScript, Swift, Kotlin</li>
                       <li> <span className="font-bold">Frontend Development:</span> React.js, Next.js</li>
                       <li><span className="font-bold"> Backend Development: </span> Django</li>
-                      <li><span className="font-bold">Mobile App Development:</span> React Native, Expo</li>
+                      <li><span className="font-bold">Mobile App Development:</span> React Native, Expo, Swift, Kotlin</li>
                       <li><span className="font-bold">Database Management:</span> Postgres</li>
-                      <li><span className="font-bold">Project Management</span>Github</li>
+                      <li><span className="font-bold">Project Management: </span>Github</li>
                       <li><span className="font-bold">UI Design:</span>Figma</li>
                     </div>
                   </div>
@@ -47,9 +47,11 @@ export default function About() {
                     <li className="indent-8"> <span className="font-bold"> Bachelor of Technology in Financial Management </span> - Federal University of Technology Owerri, 2014</li>
                     <p className="font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#13B0F5] to-[#E70FAA] inline-block">Certifications</p>
                     <div className="indent-8">
-                      <li className="text-blue-400 hover:cursor-pointer underline"> <a href="https://coursera.org/verify/specialization/DND6JKVHC4DL" target="_blank">React Native Specialization by Meta, 2024</a> </li>
-                      <li className="text-blue-400 hover:cursor-pointer underline"> <a href="https://www.credly.com/badges/c2698a86-5782-4a26-a776-8a535c1e9b47/public_url" target="_blank">Front-End Developer Professional Certificate by Meta, 2024</a> </li>
-                      <li className="text-blue-400 hover:cursor-pointer underline"> <a href="https://www.credly.com/badges/d99ad970-ee62-44f4-ab3d-1cabda7f3e06/public_url" target="_blank">Back-End Developer Professional Certificate by Meta, 2024</a> </li>
+                      <li className="text-blue-400 hover:cursor-pointer underline"> <a href="https://www.credly.com/badges/fa821d45-fedd-4383-8702-50e30b6450cf/public_url" target="_blank">Meta Full-Stack Engineer Certificate</a> </li>
+                      <li className="text-blue-400 hover:cursor-pointer underline"> <a href="https://coursera.org/share/19c64c5c38faa514723fdf5b597b0160" target="_blank">React Native Specialization by Meta</a> </li>
+                      <li className="text-blue-400 hover:cursor-pointer underline"> <a href="https://coursera.org/share/7adaae937fb563f342bd407bbcaa5c10" target="_blank">Front-End Developer Professional Certificate by Meta</a> </li>
+                      <li className="text-blue-400 hover:cursor-pointer underline"> <a href="https://coursera.org/share/5adcc05799bbfb9a45dab455487312c0" target="_blank">Back-End Developer Professional Certificate by Meta</a> </li>
+                      <li className="text-blue-400 hover:cursor-pointer underline"> <a href="https://coursera.org/share/673572d976bc83d9642c9cd3f1a943cb" target="_blank">iOS Developer Professional Certificate</a> </li>
                       <li className="text-blue-400 hover:cursor-pointer underline"> <a href="https://entrylevel-public.s3.amazonaws.com/certificate/3f59ede6-c7b4-419c-a4ac-8c3201c00a56/b4a61a59-510a-4b78-a9db-52e4710f282a_cert.pdf" target="_blank">UX Designer, EntryLevel 2023</a> </li>
                       <li>Full stack Developer - Univelcity, 2023 </li>
                     </div>
