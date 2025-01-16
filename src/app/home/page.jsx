@@ -10,6 +10,8 @@ import { FaLink } from "react-icons/fa6";
 import Project_bar from "../components/Project_bar";
 
 export default function Home() {
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5444473500763929"
+     crossorigin="anonymous"></script>
   return (
     <>
       <Navbar />

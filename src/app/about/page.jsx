@@ -22,6 +22,10 @@ export default function About() {
                   <p className="leading-loose">
                   As a Full Stack Developer with a strong foundation in Financial Management Technology, I leverage my unique background and passion for storytelling to create innovative and efficient digital solutions. My expertise spans React Native, Expo, React, Next.js, Python, Django, and Figma for UI/UX design, with an aspiration to specialize in mobile app development in the near future.
                   </p>
+                  <p>If you are interested in viewing my hobby which is photography, you can take a look here:</p>
+                  <a href="https://www.bensonibeabuchi.com/" target="_blank" className="font-bold text-blue-500 underline">
+                    Photography portfolio
+                  </a>
                 </div>
 
                 {/* TECHNICAL SKILLS  */}
