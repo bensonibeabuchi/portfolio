@@ -33,7 +33,7 @@ export default function About() {
                   <h2 className="font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#13B0F5] to-[#E70FAA] inline-block">TECHNICAL SKILLS</h2>
                   <div className="indent-8 leading-loose">
                     <div className="">
-                      <li className=""> <span className="font-bold">Programming Languages:</span> Python, JavaScript, Swift, Kotlin</li>
+                      <li className=""> <span className="font-bold">Programming Languages:</span> Python, JavaScript, Java, Kotlin</li>
                       <li> <span className="font-bold">Frontend Development:</span> React.js, Next.js</li>
                       <li><span className="font-bold"> Backend Development: </span> Django</li>
                       <li><span className="font-bold">Mobile App Development:</span> React Native, Expo, Swift, Kotlin</li>
@@ -101,7 +101,7 @@ export default function About() {
                   <h2 className="font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#13B0F5] to-[#E70FAA] inline-block">SOCIAL MEDIA</h2>
                   <div>
                     <div className="flex gap-4">
-                      <Link href="https://www.linkedin.com/in/benson-ugochukwu-ibeabuchi/" target="_blank">
+                      <Link href="https://www.linkedin.com/in/bensonibeabuchi/" target="_blank">
                         <FaLinkedin className="h-8 w-8 mt-4" />
                       </Link>
                       <Link href="https://github.com/bensonibeabuchi" target="_blank">
