@@ -16,7 +16,7 @@ export default function Navbar() {
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
               <div className="flex-shrink-0 ">
-                <a href="/home">
+                <a href="/">
                   <Image src={"https://github.com/bensonibeabuchi/capstoneimages/blob/main/images/benson_logo.png?raw=true"} height={100} alt="logo" width={200} className="m-8 cursor-pointer" />
                 </a>
               </div>

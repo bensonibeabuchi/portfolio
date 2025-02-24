@@ -5,6 +5,8 @@ import Image from "next/image";
 import zlide from "../../../public/images/zlide.png";
 import dugout from "../../../public/images/dugout.png";
 import Link from "next/link";
+import Head from 'next/head'
+
 
 import { FaLink } from "react-icons/fa6";
 
@@ -15,6 +17,11 @@ export default function Home() {
      crossorigin="anonymous"></script>
   return (
     <>
+    <Head>
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5444473500763929" crossorigin="anonymous">
+
+     </script>
+      </Head>
       <Navbar />
 
       <div>
