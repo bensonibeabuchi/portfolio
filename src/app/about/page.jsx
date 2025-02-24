@@ -3,10 +3,15 @@ import Navbar from "../components/Navbar";
 import Image from "next/image";
 import { FaGithub, FaLinkedin, FaTwitterSquare } from "react-icons/fa";
 import Link from "next/link";
+import Head from "next/head";
 
 export default function About() {
   return (
     <>
+    <Head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5444473500763929"
+     crossorigin="anonymous"></script>
+    </Head>
       <Navbar />
       <div>
         <div className="mt-16">
