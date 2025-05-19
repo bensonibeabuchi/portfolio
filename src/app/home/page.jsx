@@ -62,6 +62,23 @@ export default function Home() {
           </div>
 
           <div className="md:w-[371px] w-[330px] md:h-[614px] p-4 rounded-xl shadow-2xl bg-white hover:scale-105 transition-all mx-auto overflow-clip mb-16 ">
+              <h1 className="font-semibold text-2xl mt-4">Echo (Mobile App)</h1>
+              <p className="font-light mb-3">A mobile app that get&apos;s Live news from All over the world</p>
+              <div className="h-[215px] bg-red-400 overflow-hidden">
+                <Image src={"https://github.com/bensonibeabuchi/capstoneimages/blob/main/images/4.png?raw=true"} height={100} alt="Echo website" width={900} className="object-cover h-full w-full" />
+              </div>
+              {/* <p className="bg-clip-text font-medium text-transparent bg-gradient-to-r from-[#13B0F5] to-[#E70FAA] inline-block mt-4">Tech Stack</p> */}
+              <p className="bg-clip-text font-medium text-transparent bg-gradient-to-r from-[#13B0F5] to-[#E70FAA] inline-block mt-4">Expo, React Native, Python, DRF, Postgres</p>
+              <small className="text-red-500">NB: Download Expo-go from your app store to use this app</small>
+              <p className="max-h-32 font-light text-sm line-clamp-5">ECHO News API is your gateway to the latest and most relevant news, seamlessly delivered through a Django-powered platform. Developed with Django and Django Rest Framework for robust backend functionality, and styled with Tailwind CSS, our API offers a comprehensive and user friendly news experience.</p>
+              <div className="bg-black rounded-lg w-2/4 items-center ">
+                <a href="https://expo.dev/preview/update?message=Download%20Expo%20Go%20from%20your%20app%20store%20to%20preview%20this%20app&updateRuntimeVersion=1.0.0&createdAt=2025-05-19T21%3A14%3A10.332Z&slug=exp&projectId=e6b07e29-0f9f-4163-9555-43c9bceeb15f&group=75751f61-966a-4fe0-91cd-38f33d8cfd73" target="_blank" className="text-white justify-center flex p-3 my-4 cursor-pointer gap-2 items-center hover:bg-[#353535] hover:scale-105 hover:text-white rounded-md">
+                  <FaLink /> <p>Live Preview</p>
+                </a>
+              </div>
+            </div>
+
+          <div className="md:w-[371px] w-[330px] md:h-[614px] p-4 rounded-xl shadow-2xl bg-white hover:scale-105 transition-all mx-auto overflow-clip mb-16 ">
               <h1 className="font-semibold md:text-2xl text-xl mt-4">Zlide</h1>
               <p className="font-light text-xs md:text-base mb-3">This is an AI Pitch Deck maker. Just input your prompt and we handle the rest</p>
               <div className="h-[215px] overflow-hidden">
@@ -93,8 +110,8 @@ export default function Home() {
             </div>
           </div>
 
-            <div className="md:w-[371px] w-[330px] md:h-[614px] p-4 rounded-xl shadow-2xl bg-white hover:scale-105 transition-all mx-auto overflow-clip mb-16 ">
-              <h1 className="font-semibold text-2xl mt-4">Echo</h1>
+          <div className="md:w-[371px] w-[330px] md:h-[614px] p-4 rounded-xl shadow-2xl bg-white hover:scale-105 transition-all mx-auto overflow-clip mb-16 ">
+              <h1 className="font-semibold text-2xl mt-4">Echo (Web)</h1>
               <p className="font-light mb-3">A mobile app that get&apos;s Live news from All over the world</p>
               <div className="h-[215px] bg-red-400 overflow-hidden">
                 <Image src={"https://github.com/bensonibeabuchi/capstoneimages/blob/main/images/4.png?raw=true"} height={100} alt="Echo website" width={900} className="object-cover h-full w-full" />
@@ -104,11 +121,13 @@ export default function Home() {
               <small className="text-red-500">NB: Download Expo-go from your app store to use this app</small>
               <p className="max-h-32 font-light text-sm line-clamp-5">ECHO News API is your gateway to the latest and most relevant news, seamlessly delivered through a Django-powered platform. Developed with Django and Django Rest Framework for robust backend functionality, and styled with Tailwind CSS, our API offers a comprehensive and user friendly news experience.</p>
               <div className="bg-black rounded-lg w-2/4 items-center ">
-                <a href="https://expo.dev/preview/update?message=updated%20index%20page&updateRuntimeVersion=1.0.2&createdAt=2024-10-23T17%3A49%3A26.805Z&slug=exp&projectId=5f09be88-4c60-48b3-b6ad-538326f0093a&group=db88e8f1-8a7a-4c93-8f05-26ac32d42058" target="_blank" className="text-white justify-center flex p-3 my-4 cursor-pointer gap-2 items-center hover:bg-[#353535] hover:scale-105 hover:text-white rounded-md">
+                <a href="https://echo-web-two.vercel.app/" target="_blank" className="text-white justify-center flex p-3 my-4 cursor-pointer gap-2 items-center hover:bg-[#353535] hover:scale-105 hover:text-white rounded-md">
                   <FaLink /> <p>Live Preview</p>
                 </a>
               </div>
             </div>
+
+
 
             <div className="md:w-[371px] w-[330px] md:h-[614px] p-4 rounded-xl shadow-2xl bg-white hover:scale-105 transition-all mx-auto overflow-clip mb-16 ">
               <h1 className="font-semibold text-2xl mt-4">Akwukwo</h1>
