@@ -8,64 +8,102 @@ pool:
 
 variables:
   imageName: portfolio-app
-  acrName: portfolioacrregistry3691        
+  acrName: portfolioacrregistry3691
   resourceGroup: portfolio-rg
-  appServiceName: portfolio-asname  
+  appServiceName: portfolio-asname
   location: canadacentral
+  slotName: staging
 
-steps:
-  - checkout: self
+stages:
+# ──────────────────────────────────────────────
+# 1️⃣ Infrastructure Stage (Terraform)
+# ──────────────────────────────────────────────
+- stage: Infrastructure
+  displayName: "Provision Infrastructure with Terraform"
+  jobs:
+  - job: terraform
+    displayName: "Run Terraform in Infra Folder"
+    steps:
+      - checkout: self
+      - task: AzureCLI@2
+        displayName: "Terraform Apply"
+        inputs:
+          azureSubscription: "azure-portfolio-connection"
+          scriptType: bash
+          scriptLocation: inlineScript
+          inlineScript: |
+            set -e
+            cd infra
+            curl -LO https://releases.hashicorp.com/terraform/1.9.7/terraform_1.9.7_linux_amd64.zip
+            unzip terraform_1.9.7_linux_amd64.zip
+            sudo mv terraform /usr/local/bin/
+            terraform -v
 
-  # Step 1 - Log in to Azure
-  - task: AzureCLI@2
-    displayName: "Login to Azure"
-    inputs:
-      azureSubscription: "azure-portfolio-connection"
-      scriptType: bash
-      scriptLocation: inlineScript
-      inlineScript: |
-        echo "✅ Logged into Azure"
-  
-  - task: AzureCLI@2
-    displayName: "Run Terraform (infra)"
-    inputs:
-      azureSubscription: "azure-connection"
-      scriptType: bash
-      scriptLocation: inlineScript
-      inlineScript: |
-        cd infra
-        terraform init
-        terraform apply -auto-approve
+            terraform init -reconfigure \
+              -backend-config="resource_group_name=$(resourceGroup)" \
+              -backend-config="storage_account_name=portfolioterraformsa" \
+              -backend-config="container_name=tfstate" \
+              -backend-config="key=terraform.tfstate"
+
+            terraform plan -out=tfplan -var-file=terraform.tfvars
+            terraform apply -auto-approve tfplan
+
+# ──────────────────────────────────────────────
+# 2️⃣ Build & Push Stage
+# ──────────────────────────────────────────────
+- stage: Build
+  displayName: "Build and Push Docker Image to ACR"
+  dependsOn: Infrastructure
+  jobs:
+  - job: dockerBuild
+    displayName: "Docker Build and Push"
+    steps:
+      - checkout: self
+      - task: Docker@2
+        displayName: "Build and Push Docker Image"
+        inputs:
+          containerRegistry: "portfolio-acr-connection"
+          repository: "$(imageName)"
+          command: buildAndPush
+          Dockerfile: "**/Dockerfile"
+          tags: |
+            latest
+            $(Build.BuildId)
+
+# ──────────────────────────────────────────────
+# 3️⃣ Deploy Stage (App Service + Slot)
+# ──────────────────────────────────────────────
+- stage: Deploy
+  displayName: "Deploy to Azure App Service"
+  dependsOn: Build
+  jobs:
+  - job: deploy
+    displayName: "Deploy Container to Staging Slot"
+    steps:
+      - checkout: self
+      - task: AzureWebAppContainer@1
+        displayName: "Deploy container to Azure App Service"
+        inputs:
+          azureSubscription: "azure-portfolio-connection"
+          appName: "$(appServiceName)"
+          imageName: "$(acrName).azurecr.io/$(imageName):latest"
+        condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/dev'))
 
 
-  # Step 2 - Log in to Azure Container Registry
-  - task: AzureCLI@2
-    displayName: "Log in to Azure Container Registry"
-    inputs:
-      azureSubscription: "azure-portfolio-connection"
-      scriptType: bash
-      scriptLocation: inlineScript
-      inlineScript: |
-        az acr login --name $ACRNAME
-    env:
-      ACRNAME: $(acrName)
-
-  # Step 3 - Build and push Docker image to ACR
-  - task: Docker@2
-    displayName: "Build and Push Docker image to ACR"
-    inputs:
-      containerRegistry: "portfolio-acr-connection"
-      repository: $(imageName)
-      command: buildAndPush
-      Dockerfile: "**/Dockerfile"
-      tags: |
-        latest
-        $(Build.BuildId)
-
-  # Step 4 - Deploy to Azure App Service
-  - task: AzureWebAppContainer@1
-    displayName: "Deploy container to Azure App Service"
-    inputs:
-      azureSubscription: "azure-portfolio-connection"
-      appName: "$(appServiceName)"
-      imageName: "$(acrName).azurecr.io/$(imageName):latest"
+  # Optional - Swap staging to production
+  - job: swap
+    dependsOn: deploy
+    displayName: "Swap Staging to Production"
+    steps:
+      - task: AzureCLI@2
+        displayName: "Swap Deployment Slots"
+        inputs:
+          azureSubscription: "azure-portfolio-connection"
+          scriptType: bash
+          scriptLocation: inlineScript
+          inlineScript: |
+            az webapp deployment slot swap \
+              --name $(appServiceName) \
+              --resource-group $(resourceGroup) \
+              --slot $(slotName) \
+              --target-slot production
