@@ -1,0 +1,37 @@
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  - name: environment
+    value: dev
+
+stages:
+- stage: Terraform
+  displayName: 'Terraform Infrastructure Deployment'
+  jobs:
+  - job: terraform
+    displayName: 'Provision Infrastructure'
+    steps:
+    - task: AzureCLI@2
+      displayName: 'Login to Azure'
+      inputs:
+        azureSubscription: 'azure-portfolio-connection'
+        scriptType: bash
+        scriptLocation: inlineScript
+        inlineScript: |
+          echo "Initializing Terraform..."
+          cd infra
+          terraform init \
+            -backend-config="resource_group_name=rg-stem-${{ variables.environment }}" \
+            -backend-config="storage_account_name=ststem${{ variables.environment }}" \
+            -backend-config="container_name=tfstate" \
+            -backend-config="key=terraform.tfstate"
+
+          echo "Planning Terraform..."
+          terraform plan -out=tfplan
+
+          echo "Applying Terraform..."
+          terraform apply -auto-approve tfplan
