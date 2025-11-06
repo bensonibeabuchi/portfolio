@@ -1,3 +1,4 @@
+'use client'
 import React from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -6,6 +7,8 @@ import zlide from "../../../public/images/zlide.png";
 import dugout from "../../../public/images/dugout.png";
 import Link from "next/link";
 import Head from 'next/head'
+import { TypeAnimation } from 'react-type-animation';
+
 
 
 import { FaLink } from "react-icons/fa6";
@@ -26,10 +29,27 @@ export default function Home() {
       <div>
         {/* Hero Section */}
         <div className="flex mt-24 mx-auto items-center justify-center text-center">
+          {/* <div className="text-wrap">
+            <p className="md:text-[156px] text-3xl font-bold bg-clip-text text-transparent leading-none bg-gradient-to-r from-[#F5B613] to-[#E70F0F]"><span className="text-black">I am</span>Benson Ibeabuchi </p>
+            <p className="md:text-5xl text-md font-bold mt-8">An Azure <span className="bg-clip-text text-transparent leading-none bg-gradient-to-r from-[#f5134c] to-[#0f45e7]">DevOps</span> Engineer ⚙️</p>
+            <p className="md:text-5xl text-md font-bold mt-8">Full-stack Developer 💻</p>
+          </div> */}
           <div className="text-wrap">
-            {/* <p className="text-base md:text-2xl font-bold">Hi, I am</p> */}
-            <p className="md:text-[156px] text-3xl font-bold bg-clip-text text-transparent leading-none bg-gradient-to-r from-[#F5B613] to-[#E70F0F]"><span className="text-black">I am</span>Benson Ibeabuchi</p>
-            <p className="md:text-5xl text-3xl font-bold mt-8">The fullstack developer 💻</p>
+            <p className="md:text-[156px] text-3xl font-bold bg-clip-text text-transparent leading-none bg-gradient-to-r from-[#F5B613] to-[#E70F0F]">
+              <span className="text-black">I am </span>Benson Ibeabuchi
+            </p>
+            <p className="md:text-5xl text-3xl font-bold mt-8">
+              <TypeAnimation
+                sequence={[
+                  'An Azure DevOps Engineer ⚙️',
+                  3000,
+                  'A Full-stack Developer 💻',
+                  3000,
+                ]}
+                speed={50}
+                repeat={Infinity}
+              />
+            </p>
           </div>
           {/* <div className="hidden md:block">
             <Image src={"https://github.com/bensonibeabuchi/capstoneimages/blob/main/images/hero_side.png?raw=true"} width={500} alt="code snippets" height="500" />
