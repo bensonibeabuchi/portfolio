@@ -7,13 +7,13 @@ variable "location" {
 }
 
 variable "acr_name" {
-  default = "portfolioregistry"
+  default = "portfolioacrregistry3691"
 }
 
 variable "app_service_plan_name" {
-  default = "portfolio-asp"
+  default = "portfolio-asplan"
 }
 
 variable "app_service_name" {
-  default = "portfolio-appsvc"
+  default = "portfolio-asname"
 }
