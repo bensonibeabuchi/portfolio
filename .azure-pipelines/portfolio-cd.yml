@@ -12,7 +12,7 @@ variables:
   resourceGroup: portfolio-rg
   appServiceName: portfolio-asname
   location: canadacentral
-  slotName: staging
+  keyVaultName: portfolio-kv
 
 stages:
 # ──────────────────────────────────────────────
@@ -25,6 +25,16 @@ stages:
     displayName: "Run Terraform in Infra Folder"
     steps:
       - checkout: self
+
+      # Install Terraform
+      - script: |
+          curl -LO https://releases.hashicorp.com/terraform/1.9.7/terraform_1.9.7_linux_amd64.zip
+          unzip terraform_1.9.7_linux_amd64.zip
+          sudo mv terraform /usr/local/bin/
+          terraform -v
+        displayName: "Install Terraform"
+
+      # Terraform init, plan, apply
       - task: AzureCLI@2
         displayName: "Terraform Apply"
         inputs:
@@ -34,33 +44,50 @@ stages:
           inlineScript: |
             set -e
             cd infra
-            curl -LO https://releases.hashicorp.com/terraform/1.9.7/terraform_1.9.7_linux_amd64.zip
-            unzip terraform_1.9.7_linux_amd64.zip
-            sudo mv terraform /usr/local/bin/
-            terraform -v
 
+            echo "Initializing Terraform backend..."
             terraform init -reconfigure \
               -backend-config="resource_group_name=$(resourceGroup)" \
               -backend-config="storage_account_name=portfolioterraformsa" \
               -backend-config="container_name=tfstate" \
               -backend-config="key=terraform.tfstate"
 
+            echo "Planning Terraform..."
             terraform plan -out=tfplan -var-file=terraform.tfvars
+
+            echo "Applying Terraform..."
             terraform apply -auto-approve tfplan
+        env:
+          ARM_CLIENT_ID: $(servicePrincipalId)
+          ARM_CLIENT_SECRET: $(servicePrincipalKey)
+          ARM_SUBSCRIPTION_ID: $(subscriptionId)
+          ARM_TENANT_ID: $(tenantId)
 
 # ──────────────────────────────────────────────
-# 2️⃣ Build & Push Stage
+# 2️⃣ Build & Push Docker Image
 # ──────────────────────────────────────────────
 - stage: Build
-  displayName: "Build and Push Docker Image to ACR"
+  displayName: "Build and Push Docker Image"
   dependsOn: Infrastructure
   jobs:
   - job: dockerBuild
     displayName: "Docker Build and Push"
     steps:
       - checkout: self
+
+      # Login to ACR
+      - task: AzureCLI@2
+        displayName: "Login to ACR"
+        inputs:
+          azureSubscription: "azure-portfolio-connection"
+          scriptType: bash
+          scriptLocation: inlineScript
+          inlineScript: |
+            az acr login --name $(acrName)
+
+      # Build and push Docker image
       - task: Docker@2
-        displayName: "Build and Push Docker Image"
+        displayName: "Build & Push Docker Image"
         inputs:
           containerRegistry: "portfolio-acr-connection"
           repository: "$(imageName)"
@@ -71,39 +98,36 @@ stages:
             $(Build.BuildId)
 
 # ──────────────────────────────────────────────
-# 3️⃣ Deploy Stage (App Service + Slot)
+# 3️⃣ Deploy to Azure App Service
 # ──────────────────────────────────────────────
 - stage: Deploy
   displayName: "Deploy to Azure App Service"
   dependsOn: Build
   jobs:
   - job: deploy
-    displayName: "Deploy Container to Staging Slot"
+    displayName: "Deploy Container to App Service"
     steps:
       - checkout: self
+
+      # Deploy directly to App Service (free tier)
       - task: AzureWebAppContainer@1
-        displayName: "Deploy container to Azure App Service"
+        displayName: "Deploy to App Service"
         inputs:
           azureSubscription: "azure-portfolio-connection"
           appName: "$(appServiceName)"
           imageName: "$(acrName).azurecr.io/$(imageName):latest"
-        condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/dev'))
 
-
-  # Optional - Swap staging to production
-  - job: swap
-    dependsOn: deploy
-    displayName: "Swap Staging to Production"
-    steps:
+      # Inject Key Vault secrets into App Service
       - task: AzureCLI@2
-        displayName: "Swap Deployment Slots"
+        displayName: "Inject Key Vault Secrets into App Service"
         inputs:
           azureSubscription: "azure-portfolio-connection"
           scriptType: bash
           scriptLocation: inlineScript
           inlineScript: |
-            az webapp deployment slot swap \
+            # Example: inject secret DATABASE_URL
+            secretUri=$(az keyvault secret show --vault-name $(keyVaultName) --name DATABASE_URL --query id -o tsv)
+            az webapp config appsettings set \
               --name $(appServiceName) \
               --resource-group $(resourceGroup) \
-              --slot $(slotName) \
-              --target-slot production
+              --settings "DATABASE_URL=@Microsoft.KeyVault(SecretUri=${secretUri})"
