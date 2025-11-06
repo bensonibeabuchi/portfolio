@@ -13,25 +13,37 @@ stages:
   displayName: 'Terraform Infrastructure Deployment'
   jobs:
   - job: terraform
-    displayName: 'Provision Infrastructure'
+    displayName: 'Provision Infrastructure with Terraform'
     steps:
-    - task: AzureCLI@2
-      displayName: 'Login to Azure'
+    # 1️⃣ Install Terraform
+    - task: TerraformInstaller@1
+      displayName: 'Install Terraform'
       inputs:
-        azureSubscription: 'azure-portfolio-connection'
+        terraformVersion: 'latest'
+
+    # 2️⃣ Azure Login and Terraform Execution
+    - task: AzureCLI@2
+      displayName: 'Run Terraform to Provision Infrastructure'
+      inputs:
+        azureSubscription: 'azure-portfolio-connection'  # <-- Your Azure Service Connection
         scriptType: bash
         scriptLocation: inlineScript
         inlineScript: |
-          echo "Initializing Terraform..."
+          echo "📦 Switching to infra directory"
           cd infra
+
+          echo "🚀 Initializing Terraform..."
           terraform init \
-            -backend-config="resource_group_name=rg-stem-${{ variables.environment }}" \
-            -backend-config="storage_account_name=ststem${{ variables.environment }}" \
+            -backend-config="resource_group_name=portfolio-rg" \
+            -backend-config="storage_account_name=portfolioterraformsa" \
             -backend-config="container_name=tfstate" \
             -backend-config="key=terraform.tfstate"
 
-          echo "Planning Terraform..."
+          echo "🧩 Validating Terraform configuration..."
+          terraform validate
+
+          echo "🪄 Running Terraform Plan..."
           terraform plan -out=tfplan
 
-          echo "Applying Terraform..."
+          echo "⚙️ Applying Terraform..."
           terraform apply -auto-approve tfplan
