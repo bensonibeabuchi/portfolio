@@ -25,7 +25,7 @@ stages:
     - task: AzureCLI@2
       displayName: 'Run Terraform to Provision Infrastructure'
       inputs:
-        azureSubscription: 'azure-portfolio-connection'  # <-- Your Azure Service Connection
+        azureSubscription: 'azure-portfolio-connection'  
         scriptType: bash
         scriptLocation: inlineScript
         inlineScript: |
@@ -33,11 +33,17 @@ stages:
           cd infra
 
           echo "🚀 Initializing Terraform..."
-          terraform init \
-            -backend-config="resource_group_name=portfolio-rg" \
-            -backend-config="storage_account_name=portfolioterraformsa" \
-            -backend-config="container_name=tfstate" \
-            -backend-config="key=terraform.tfstate"
+          terraform init -reconfigure \
+          -backend-config="resource_group_name=portfolio-rg" \
+          -backend-config="storage_account_name=portfolioterraformsa" \
+          -backend-config="container_name=tfstate" \
+          -backend-config="key=terraform.tfstate"
+  
+          if [ $? -ne 0 ]; then
+            echo "❌ Terraform backend initialization failed"
+            exit 1
+          fi
+
 
           echo "🧩 Validating Terraform configuration..."
           terraform validate
