@@ -44,6 +44,12 @@ stages:
             set -e
             cd infra
 
+            echo "Setting environment variables for Terraform..."
+            export ARM_CLIENT_ID=$servicePrincipalId
+            export ARM_CLIENT_SECRET=$servicePrincipalKey
+            export ARM_SUBSCRIPTION_ID=$subscriptionId
+            export ARM_TENANT_ID=$tenantId
+
             echo "Initializing Terraform backend..."
             terraform init -reconfigure \
               -backend-config="resource_group_name=$(resourceGroup)" \
