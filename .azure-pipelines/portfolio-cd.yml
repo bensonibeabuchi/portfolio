@@ -7,12 +7,11 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
-  imageName: portfolio-app
-  acrName: portfolioacrregistry3691
   resourceGroup: portfolio-rg
-  appServiceName: portfolio-asname
   location: canadacentral
-  keyVaultName: portfolio-kv
+  appServiceName: portfolio-asname
+  appServicePlanName: portfolio-asplan
+  imageName: portfolio-app
 
 stages:
 # ──────────────────────────────────────────────
@@ -22,7 +21,7 @@ stages:
   displayName: "Provision Infrastructure with Terraform"
   jobs:
   - job: terraform
-    displayName: "Run Terraform in Infra Folder"
+    displayName: "Run Terraform in infra folder"
     steps:
       - checkout: self
 
@@ -34,22 +33,9 @@ stages:
           terraform -v
         displayName: "Install Terraform"
 
+      # Terraform Init, Plan, Apply
       - task: AzureCLI@2
-        displayName: "Export Service Principal credentials"
-        inputs:
-          azureSubscription: "azure-portfolio-connection"
-          scriptType: bash
-          scriptLocation: inlineScript
-          inlineScript: |
-            echo "##vso[task.setvariable variable=ARM_CLIENT_ID]$servicePrincipalId"
-            echo "##vso[task.setvariable variable=ARM_CLIENT_SECRET]$servicePrincipalKey"
-            echo "##vso[task.setvariable variable=ARM_SUBSCRIPTION_ID]$subscriptionId"
-            echo "##vso[task.setvariable variable=ARM_TENANT_ID]$tenantId"
-
-
-      # Terraform init, plan, apply
-      - task: AzureCLI@2
-        displayName: "Terraform Apply"
+        displayName: "Run Terraform to Deploy Infrastructure"
         inputs:
           azureSubscription: "azure-portfolio-connection"
           scriptType: bash
@@ -66,81 +52,62 @@ stages:
               -backend-config="key=terraform.tfstate"
 
             echo "Planning Terraform..."
-            terraform plan -out=tfplan -var-file=terraform.tfvars
+            terraform plan -out=tfplan \
+              -var "resource_group_name=$(resourceGroup)" \
+              -var "location=$(location)" \
+              -var "app_service_plan_name=$(appServicePlanName)" \
+              -var "app_service_name=$(appServiceName)" \
+              -var "dockerhub_username=$(dockerhub_username)" \
+              -var "dockerhub_password=$(dockerhub_password)"
 
             echo "Applying Terraform..."
             terraform apply -auto-approve tfplan
         env:
-          ARM_CLIENT_ID: $(servicePrincipalId)
-          ARM_CLIENT_SECRET: $(servicePrincipalKey)
-          ARM_SUBSCRIPTION_ID: $(subscriptionId)
-          ARM_TENANT_ID: $(tenantId)
+          ARM_USE_MSI: true
+          dockerhub_username: $(dockerhub_username)
+          dockerhub_password: $(dockerhub_password)
 
 # ──────────────────────────────────────────────
-# 2️⃣ Build & Push Docker Image
+# 2️⃣ Build & Push Docker Image (Docker Hub)
 # ──────────────────────────────────────────────
 - stage: Build
-  displayName: "Build and Push Docker Image"
+  displayName: "Build and Push Docker Image to Docker Hub"
   dependsOn: Infrastructure
   jobs:
-  - job: dockerBuild
-    displayName: "Docker Build and Push"
+  - job: buildDocker
+    displayName: "Build & Push to Docker Hub"
     steps:
       - checkout: self
 
-      # Login to ACR
-      - task: AzureCLI@2
-        displayName: "Login to ACR"
-        inputs:
-          azureSubscription: "azure-portfolio-connection"
-          scriptType: bash
-          scriptLocation: inlineScript
-          inlineScript: |
-            az acr login --name $(acrName)
+      - script: |
+          echo "Logging into Docker Hub..."
+          echo $(dockerhub_password) | docker login -u $(dockerhub_username) --password-stdin
 
-      # Build and push Docker image
-      - task: Docker@2
+          echo "Building image..."
+          docker build -t $(dockerhub_username)/$(imageName):latest .
+
+          echo "Pushing to Docker Hub..."
+          docker push $(dockerhub_username)/$(imageName):latest
         displayName: "Build & Push Docker Image"
-        inputs:
-          containerRegistry: "portfolio-acr-connection"
-          repository: "$(imageName)"
-          command: buildAndPush
-          Dockerfile: "**/Dockerfile"
-          tags: |
-            latest
-            $(Build.BuildId)
+        env:
+          dockerhub_username: $(dockerhub_username)
+          dockerhub_password: $(dockerhub_password)
 
 # ──────────────────────────────────────────────
-# 3️⃣ Deploy to Azure App Service
+# 3️⃣ Deploy Stage
 # ──────────────────────────────────────────────
 - stage: Deploy
-  displayName: "Deploy to Azure App Service"
+  displayName: "Deploy Docker Image to Azure App Service"
   dependsOn: Build
   jobs:
   - job: deploy
-    displayName: "Deploy Container to App Service"
+    displayName: "Deploy to Azure App Service"
     steps:
       - checkout: self
 
-      # Deploy directly to App Service (free tier)
       - task: AzureWebAppContainer@1
-        displayName: "Deploy to App Service"
+        displayName: "Deploy container from Docker Hub"
         inputs:
           azureSubscription: "azure-portfolio-connection"
           appName: "$(appServiceName)"
-          imageName: "$(acrName).azurecr.io/$(imageName):latest"
-
-      # Inject Key Vault secrets into App Service
-      - task: AzureCLI@2
-        displayName: "Inject Key Vault Secrets into App Service"
-        inputs:
-          azureSubscription: "azure-portfolio-connection"
-          scriptType: bash
-          scriptLocation: inlineScript
-          inlineScript: |
-            # Example: inject secret DATABASE_URL
-            secretUri=$(az keyvault secret show --vault-name $(keyVaultName) --name DATABASE_URL --query id -o tsv)
-            az webapp config appsettings set \
-              --name $(appServiceName) \
-              --resource-group $(resourceGroup) \
-              --settings "DATABASE_URL=@Microsoft.KeyVault(SecretUri=${secretUri})"
+          imageName: "$(dockerhub_username)/$(imageName):latest"

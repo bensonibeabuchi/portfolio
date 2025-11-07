@@ -19,8 +19,10 @@ variable "app_service_name" {
 }
 
 variable "dockerhub_username" {
-  default = "bensonibeabuchi"
+  description = "Docker Hub username"
 }
+
 variable "dockerhub_password" {
-  default = "dckr_pat_oh7DhklNw9BTYMdmrAs206bCii8"
+  description = "Docker Hub personal access token"
+  sensitive   = true
 }
