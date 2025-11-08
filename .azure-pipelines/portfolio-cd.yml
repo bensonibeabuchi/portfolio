@@ -1,78 +1,58 @@
 trigger:
-  branches:
-    include:
-      - main
+- main
 
 pool:
   vmImage: ubuntu-latest
 
-variables:
-  resourceGroup: portfolio-rg
-  location: canadacentral
-  appServiceName: portfolio-asname
-  appServicePlanName: portfolio-asplan
-  imageName: portfolio-app
-
 stages:
-# ──────────────────────────────────────────────
-# 1️⃣ Infrastructure Stage (Terraform)
-# ──────────────────────────────────────────────
-- stage: Infrastructure
-  displayName: "Provision Infrastructure with Terraform"
+- stage: Terraform
+  displayName: 'Terraform Infrastructure Deployment'
   jobs:
   - job: terraform
-    displayName: "Run Terraform in infra folder"
+    displayName: 'Provision Infrastructure with Terraform'
     steps:
-      - checkout: self
+    # 1️⃣ Install Terraform
+    - task: TerraformInstaller@1
+      displayName: 'Install Terraform'
+      inputs:
+        terraformVersion: 'latest'
 
-      # Install Terraform
-      - script: |
-          curl -LO https://releases.hashicorp.com/terraform/1.9.7/terraform_1.9.7_linux_amd64.zip
-          unzip terraform_1.9.7_linux_amd64.zip
-          sudo mv terraform /usr/local/bin/
-          terraform -v
-        displayName: "Install Terraform"
+    # 2️⃣ Azure login & Terraform steps
+    - task: AzureCLI@2
+      displayName: 'Terraform: Init, Import, Plan, Apply'
+      inputs:
+        azureSubscription: 'azure-portfolio-connection'
+        scriptType: bash
+        scriptLocation: inlineScript
+        inlineScript: |
+          echo "📦 Switching to infra directory"
+          cd infra
 
-      # Terraform Init, Plan, Apply
-      - task: AzureCLI@2
-        displayName: "Run Terraform to Deploy Infrastructure"
-        inputs:
-          azureSubscription: "azure-portfolio-connection"
-          scriptType: bash
-          scriptLocation: inlineScript
-          inlineScript: |
-            set -e
-            cd infra
+          echo "🚀 Initializing Terraform backend..."
+          terraform init -reconfigure \
+            -backend-config="resource_group_name=portfolio-rg" \
+            -backend-config="storage_account_name=portfolioterraformsa" \
+            -backend-config="container_name=tfstate" \
+            -backend-config="key=terraform.tfstate"
 
-            echo "🔹 Fetching Azure authentication context..."
-            az account show
+          # Import existing resource group if not managed
+          terraform state list | grep azurerm_resource_group.rg
+          if [ $? -ne 0 ]; then
+            echo "📦 Importing existing resource group into Terraform state..."
+            terraform import azurerm_resource_group.rg /subscriptions/b728acf7-1a7a-4ac6-b8d8-73fc18c8a1a1/resourceGroups/portfolio-rg
+          else
+            echo "✅ Resource group already managed by Terraform"
+          fi
 
-            echo "🪄 Initializing Terraform backend..."
-            terraform init -reconfigure \
-              -backend-config="resource_group_name=$(resourceGroup)" \
-              -backend-config="storage_account_name=portfolioterraformsa" \
-              -backend-config="container_name=tfstate" \
-              -backend-config="key=terraform.tfstate"
+          echo "🧩 Validating Terraform configuration..."
+          terraform validate
 
-            echo "🧠 Running Terraform plan..."
-            terraform plan -out=tfplan \
-              -var "resource_group_name=$(resourceGroup)" \
-              -var "location=$(location)" \
-              -var "app_service_plan_name=$(appServicePlanName)" \
-              -var "app_service_name=$(appServiceName)" \
-              -var "dockerhub_username=$(dockerhub_username)" \
-              -var "dockerhub_password=$(dockerhub_password)"
+          echo "🪄 Running Terraform Plan..."
+          terraform plan -out=tfplan -var-file=terraform.tfvars
 
-            echo "🚀 Applying Terraform..."
-            terraform apply -auto-approve tfplan
-        env:
-          ARM_CLIENT_ID: $(servicePrincipalId)
-          ARM_CLIENT_SECRET: $(servicePrincipalKey)
-          ARM_SUBSCRIPTION_ID: $(subscriptionId)
-          ARM_TENANT_ID: $(tenantId)
-          ARM_USE_MSI: false
-          dockerhub_username: $(dockerhub_username)
-          dockerhub_password: $(dockerhub_password)
+          echo "⚙️ Applying Terraform..."
+          terraform apply -auto-approve tfplan
+
 
 # ──────────────────────────────────────────────
 # 2️⃣ Build & Push Docker Image (Docker Hub)

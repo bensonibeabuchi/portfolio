@@ -11,4 +11,4 @@ acr_name              = "portfolioacrregistry3691"
 app_service_plan_name = "portfolio-asplan"
 
 # Web App name
-app_service_name      = "portfolio-asname"
+app_service_name      = "bensonibeabuchiportfolio"

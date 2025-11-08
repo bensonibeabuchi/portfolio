@@ -15,7 +15,7 @@ variable "app_service_plan_name" {
 }
 
 variable "app_service_name" {
-  default = "portfolio-asname"
+  default = "bensonibeabuchiportfolio"
 }
 
 variable "dockerhub_username" {
