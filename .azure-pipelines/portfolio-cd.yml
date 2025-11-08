@@ -54,7 +54,7 @@ stages:
               -backend-config="container_name=tfstate" \
               -backend-config="key=terraform.tfstate"
 
-            echo "📦 Running Terraform plan..."
+            echo "🧠 Running Terraform plan..."
             terraform plan -out=tfplan \
               -var "resource_group_name=$(resourceGroup)" \
               -var "location=$(location)" \
@@ -65,7 +65,14 @@ stages:
 
             echo "🚀 Applying Terraform..."
             terraform apply -auto-approve tfplan
-
+        env:
+          ARM_CLIENT_ID: $(servicePrincipalId)
+          ARM_CLIENT_SECRET: $(servicePrincipalKey)
+          ARM_SUBSCRIPTION_ID: $(subscriptionId)
+          ARM_TENANT_ID: $(tenantId)
+          ARM_USE_MSI: false
+          dockerhub_username: $(dockerhub_username)
+          dockerhub_password: $(dockerhub_password)
 
 # ──────────────────────────────────────────────
 # 2️⃣ Build & Push Docker Image (Docker Hub)
