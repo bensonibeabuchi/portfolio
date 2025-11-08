@@ -15,6 +15,7 @@ variables:
   storageAccountName: portfolioterraformsa
   containerName: tfstate
 
+stages:
 # ──────────────────────────────────────────────
 # 0️⃣ Bootstrap Stage (ensure Terraform backend exists)
 # ──────────────────────────────────────────────
