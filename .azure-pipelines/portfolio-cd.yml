@@ -44,29 +44,26 @@ stages:
             set -e
             cd infra
 
-            echo "Setting environment variables for Terraform..."
-            export ARM_CLIENT_ID=$servicePrincipalId
-            export ARM_CLIENT_SECRET=$servicePrincipalKey
-            export ARM_SUBSCRIPTION_ID=$subscriptionId
-            export ARM_TENANT_ID=$tenantId
+            echo "🔹 Fetching Azure authentication context..."
+            SUBSCRIPTION_ID=$(az account show --query id -o tsv)
+            TENANT_ID=$(az account show --query tenantId -o tsv)
+            CLIENT_ID=$(az ad sp list --display-name $(az account show --query user.name -o tsv) --query '[0].appId' -o tsv)
+            
+            echo "✅ Subscription ID: $SUBSCRIPTION_ID"
+            echo "✅ Tenant ID: $TENANT_ID"
 
-            echo "Initializing Terraform backend..."
+            export ARM_SUBSCRIPTION_ID=$SUBSCRIPTION_ID
+            export ARM_TENANT_ID=$TENANT_ID
+            export ARM_USE_MSI=true
+
+            echo "🪄 Initializing Terraform backend..."
             terraform init -reconfigure \
               -backend-config="resource_group_name=$(resourceGroup)" \
               -backend-config="storage_account_name=portfolioterraformsa" \
               -backend-config="container_name=tfstate" \
               -backend-config="key=terraform.tfstate"
-            
-            # Import existing resource group if not managed
-            terraform state list | grep azurerm_resource_group.rg
-            if [ $? -ne 0 ]; then
-              echo "📦 Importing existing resource group into Terraform state..."
-              terraform import azurerm_resource_group.rg /subscriptions/b728acf7-1a7a-4ac6-b8d8-73fc18c8a1a1/resourceGroups/portfolio-rg
-            else
-              echo "✅ Resource group already managed by Terraform"
-            fi
 
-            echo "Planning Terraform..."
+            echo "🧠 Running Terraform plan..."
             terraform plan -out=tfplan \
               -var "resource_group_name=$(resourceGroup)" \
               -var "location=$(location)" \
@@ -75,8 +72,9 @@ stages:
               -var "dockerhub_username=$(dockerhub_username)" \
               -var "dockerhub_password=$(dockerhub_password)"
 
-            echo "Applying Terraform..."
+            echo "🚀 Applying Terraform..."
             terraform apply -auto-approve tfplan
+
         env:
           ARM_USE_MSI: true
           dockerhub_username: $(dockerhub_username)
