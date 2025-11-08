@@ -12,31 +12,56 @@ variables:
   appServiceName: bensonibeabuchiportfolio
   appServicePlanName: portfolio-asplan
   imageName: portfolio-app
+  storageAccountName: portfolioterraformsa
+  containerName: tfstate
 
-stages:
 # ──────────────────────────────────────────────
-# 1️⃣ Bootstrap Stage (Terraform)
+# 0️⃣ Bootstrap Stage (ensure Terraform backend exists)
 # ──────────────────────────────────────────────
 - stage: Bootstrap
-  displayName: "Create Terraform Backend"
+  displayName: "Ensure Terraform backend exists"
   jobs:
-    - job: createBackend
-      steps:
-        - task: AzureCLI@2
-          inputs:
-            azureSubscription: "azure-portfolio-connection"
-            scriptType: bash
-            scriptLocation: inlineScript
-            inlineScript: |
-              az group create --name $(resourceGroup) --location $(location)
-              az storage account create --name portfolioterraformsa --resource-group $(resourceGroup) --location $(location) --sku Standard_LRS
-              az storage container create --name tfstate --account-name portfolioterraformsa
+  - job: createBackend
+    displayName: "Create backend resources if missing"
+    steps:
+      - task: AzureCLI@2
+        displayName: "Check/Create Backend RG, Storage, Container"
+        inputs:
+          azureSubscription: "azure-portfolio-connection"
+          scriptType: bash
+          scriptLocation: inlineScript
+          inlineScript: |
+            set -e
+
+            echo "🔹 Ensuring resource group exists..."
+            az group create --name $(resourceGroup) --location $(location) --output none
+
+            echo "🔹 Ensuring storage account exists..."
+            if ! az storage account show --name $(storageAccountName) --resource-group $(resourceGroup) &>/dev/null; then
+              az storage account create \
+                --name $(storageAccountName) \
+                --resource-group $(resourceGroup) \
+                --location $(location) \
+                --sku Standard_LRS \
+                --kind StorageV2
+            else
+              echo "Storage account $(storageAccountName) already exists."
+            fi
+
+            echo "🔹 Ensuring blob container exists..."
+            STORAGE_KEY=$(az storage account keys list --account-name $(storageAccountName) --resource-group $(resourceGroup) --query "[0].value" -o tsv)
+            if ! az storage container exists --name $(containerName) --account-name $(storageAccountName) --account-key $STORAGE_KEY | grep -q "true"; then
+              az storage container create --name $(containerName) --account-name $(storageAccountName) --account-key $STORAGE_KEY
+            else
+              echo "Container $(containerName) already exists."
+            fi
 
 # ──────────────────────────────────────────────
 # 1️⃣ Infrastructure Stage (Terraform)
 # ──────────────────────────────────────────────
 - stage: Infrastructure
   displayName: "Provision Infrastructure with Terraform"
+  dependsOn: Bootstrap
   jobs:
   - job: terraform
     displayName: "Run Terraform in infra folder"
@@ -68,8 +93,8 @@ stages:
             echo "🪄 Initializing Terraform backend..."
             terraform init -reconfigure \
               -backend-config="resource_group_name=$(resourceGroup)" \
-              -backend-config="storage_account_name=portfolioterraformsa" \
-              -backend-config="container_name=tfstate" \
+              -backend-config="storage_account_name=$(storageAccountName)" \
+              -backend-config="container_name=$(containerName)" \
               -backend-config="key=terraform.tfstate"
 
             echo "🧠 Running Terraform plan..."
@@ -84,11 +109,6 @@ stages:
             echo "🚀 Applying Terraform..."
             terraform apply -auto-approve tfplan
         env:
-          ARM_CLIENT_ID: $(servicePrincipalId)
-          ARM_CLIENT_SECRET: $(servicePrincipalKey)
-          ARM_SUBSCRIPTION_ID: $(subscriptionId)
-          ARM_TENANT_ID: $(tenantId)
-          ARM_USE_MSI: false
           dockerhub_username: $(dockerhub_username)
           dockerhub_password: $(dockerhub_password)
 
