@@ -59,7 +59,7 @@ stages:
 # ──────────────────────────────────────────────
 - stage: Build
   displayName: "Build and Push Docker Image to Docker Hub"
-  dependsOn: Infrastructure
+  dependsOn: Terraform
   jobs:
   - job: buildDocker
     displayName: "Build & Push to Docker Hub"
