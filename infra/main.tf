@@ -41,7 +41,7 @@ resource "azurerm_linux_web_app" "app" {
 
     application_stack {
       # docker_image     = "${azurerm_container_registry.acr.login_server}/portfolio-app"
-      docker_image     = "var.dockerhub_username/portfolio-app"
+      docker_image     = "${var.dockerhub_username}/portfolio-app"
       docker_image_tag = "latest"
     }
   }

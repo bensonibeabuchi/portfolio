@@ -6,10 +6,6 @@ variable "location" {
   default = "canadacentral"
 }
 
-variable "acr_name" {
-  default = "portfolioacrregistry3691"
-}
-
 variable "app_service_plan_name" {
   default = "portfolio-asplan"
 }
@@ -25,4 +21,12 @@ variable "dockerhub_username" {
 variable "dockerhub_password" {
   description = "Docker Hub personal access token"
   sensitive   = true
+}
+
+variable "suffix" {
+  default = "001"
+}
+
+locals {
+  storage_account_name = "portfolioterraformsa${var.suffix}"
 }
