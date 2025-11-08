@@ -56,6 +56,15 @@ stages:
               -backend-config="storage_account_name=portfolioterraformsa" \
               -backend-config="container_name=tfstate" \
               -backend-config="key=terraform.tfstate"
+            
+            # Import existing resource group if not managed
+            terraform state list | grep azurerm_resource_group.rg
+            if [ $? -ne 0 ]; then
+              echo "📦 Importing existing resource group into Terraform state..."
+              terraform import azurerm_resource_group.rg /subscriptions/b728acf7-1a7a-4ac6-b8d8-73fc18c8a1a1/resourceGroups/portfolio-rg
+            else
+              echo "✅ Resource group already managed by Terraform"
+            fi
 
             echo "Planning Terraform..."
             terraform plan -out=tfplan \
