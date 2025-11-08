@@ -47,16 +47,15 @@ stages:
             echo "🔹 Fetching Azure authentication context..."
             SUBSCRIPTION_ID=$(az account show --query id -o tsv)
             TENANT_ID=$(az account show --query tenantId -o tsv)
-            CLIENT_ID=$(az ad sp list --display-name $(az account show --query user.name -o tsv) --query '[0].appId' -o tsv)
-            
             echo "✅ Subscription ID: $SUBSCRIPTION_ID"
             echo "✅ Tenant ID: $TENANT_ID"
 
-            echo "🔑 Setting environment variables for Terraform authentication..."
-            export ARM_CLIENT_ID=$servicePrincipalId
-            export ARM_CLIENT_SECRET=$servicePrincipalKey
+            echo "🔑 Setting environment variables for Terraform..."
+            export ARM_CLIENT_ID=$(servicePrincipalId)
+            export ARM_CLIENT_SECRET=$(servicePrincipalKey)
             export ARM_SUBSCRIPTION_ID=$SUBSCRIPTION_ID
             export ARM_TENANT_ID=$TENANT_ID
+            export ARM_USE_MSI=false
 
             echo "🪄 Initializing Terraform backend..."
             terraform init -reconfigure \
@@ -76,9 +75,12 @@ stages:
 
             echo "🚀 Applying Terraform..."
             terraform apply -auto-approve tfplan
-
         env:
-          ARM_USE_MSI: true
+          ARM_CLIENT_ID: $(servicePrincipalId)
+          ARM_CLIENT_SECRET: $(servicePrincipalKey)
+          ARM_SUBSCRIPTION_ID: $(subscriptionId)
+          ARM_TENANT_ID: $(tenantId)
+          ARM_USE_MSI: false
           dockerhub_username: $(dockerhub_username)
           dockerhub_password: $(dockerhub_password)
 
