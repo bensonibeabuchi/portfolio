@@ -58,7 +58,7 @@ stages:
             fi
 
 # ──────────────────────────────────────────────
-# 1️⃣ Infrastructure Stage — Terraform
+# 1️⃣ Infrastructure Stage — Terraform (OIDC)
 # ──────────────────────────────────────────────
 - stage: Infrastructure
   displayName: "Provision Infrastructure with Terraform"
@@ -77,19 +77,25 @@ stages:
           terraform -v
         displayName: "Install Terraform"
 
-      # ✅ Run Terraform directly using OIDC environment variables (no AzureCLI@2)
+      # Run Terraform using OIDC
       - task: Bash@3
-        displayName: "Run Terraform to Deploy Infrastructure (OIDC)"
+        displayName: "Deploy Infrastructure with Terraform (OIDC)"
         inputs:
           targetType: 'inline'
           script: |
             set -e
             cd infra
 
-            echo "🔹 Using OIDC authentication with Service Principal..."
-            echo "ARM_CLIENT_ID=$ARM_CLIENT_ID"
-            echo "ARM_TENANT_ID=$ARM_TENANT_ID"
-            echo "ARM_USE_OIDC=$ARM_USE_OIDC"
+            echo "🔹 Exporting OIDC environment variables for Terraform..."
+            export ARM_USE_OIDC=true
+            export ARM_CLIENT_ID=${clientID}
+            export ARM_TENANT_ID=${tenantId}
+            export ARM_SUBSCRIPTION_ID=${subscriptionId}
+
+            echo "🧠 Terraform using OIDC Authentication"
+            echo "ARM_CLIENT_ID: $ARM_CLIENT_ID"
+            echo "ARM_TENANT_ID: $ARM_TENANT_ID"
+            echo "ARM_SUBSCRIPTION_ID: $ARM_SUBSCRIPTION_ID"
 
             echo "🪄 Initializing Terraform backend..."
             terraform init -reconfigure \
@@ -98,7 +104,7 @@ stages:
               -backend-config="container_name=$containerName" \
               -backend-config="key=terraform.tfstate"
 
-            echo "🧠 Running Terraform plan..."
+            echo "🧩 Running Terraform plan..."
             terraform plan -out=tfplan \
               -var "resource_group_name=$resourceGroup" \
               -var "location=$location" \
@@ -111,12 +117,9 @@ stages:
             terraform apply -auto-approve tfplan
 
         env:
-          # 🔑 These variables are automatically injected by Azure DevOps’ OIDC workflow
-          ARM_USE_OIDC: true
-          ARM_CLIENT_ID: $(clientID)
-          ARM_TENANT_ID: $(tenantId)
-          ARM_SUBSCRIPTION_ID: $(subscriptionId)
-          # Terraform vars
+          clientID: $(clientID)
+          tenantId: $(tenantId)
+          subscriptionId: $(subscriptionId)
           resourceGroup: $(resourceGroup)
           location: $(location)
           appServicePlanName: $(appServicePlanName)
