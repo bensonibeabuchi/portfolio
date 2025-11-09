@@ -2,12 +2,8 @@ trigger:
 - main
 
 variables:
-appServiceName: bensonibeabuchiportfolio
-imageName: portfolio-app
-dockerhub_username: bensonibeabuchi
-dockerhub_password: $(dockerhub_password)
-service_connection: azure-portfolio-connection
-
+- group: portfolio-variables
+  dockerhub_password: $(dockerhub_password)
 
 
 pool:
