@@ -41,23 +41,7 @@ stages:
 
             terraform validate
 
-            echo "🪄 Running Terraform Plan..."
-            terraform plan -out=tfplan \
-              -var "dockerhub_username=$(dockerhub_username)" \
-              -var "dockerhub_password=$(dockerhub_password)" \
-              -var-file=terraform.tfvars
-
-          # Import existing resource group if not managed
-          terraform state list | grep azurerm_resource_group.rg
-          if [ $? -ne 0 ]; then
-            echo "📦 Importing existing resource group into Terraform state..."
-            terraform import azurerm_resource_group.rg /subscriptions/b728acf7-1a7a-4ac6-b8d8-73fc18c8a1a1/resourceGroups/portfolio-rg
-          else
-            echo "✅ Resource group already managed by Terraform"
-          fi
-
-          echo "🧩 Validating Terraform configuration..."
-          terraform validate
+            
 
           echo "🪄 Running Terraform Plan..."
           terraform plan -out=tfplan -var-file=terraform.tfvars
