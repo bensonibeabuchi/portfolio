@@ -54,7 +54,7 @@ stages:
           terraform validate
 
           echo "⚙️ Applying Terraform..."
-          terraform apply -auto-approve tfplan
+          terraform apply -auto-approve tfplan || terraform apply -auto-approve -var-file=terraform.tfvars
       env:
         TF_VAR_dockerhub_username: $(dockerhub_username)
         TF_VAR_dockerhub_password: $(dockerhub_password)
