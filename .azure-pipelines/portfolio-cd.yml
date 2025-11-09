@@ -77,7 +77,7 @@ stages:
           terraform -v
         displayName: "Install Terraform"
 
-      # Terraform Init, Plan, Apply
+      # Terraform Init, Plan, Apply (using OIDC authentication)
       - task: AzureCLI@2
         displayName: "Run Terraform to Deploy Infrastructure"
         inputs:
@@ -109,13 +109,18 @@ stages:
 
             echo "🚀 Applying Terraform..."
             terraform apply -auto-approve tfplan
+
         env:
+          # ✅ Use OIDC-based authentication
           ARM_USE_OIDC: true
           ARM_CLIENT_ID: $(clientID)
           ARM_TENANT_ID: $(tenantId)
-          ARM_SUBSCRIPTION_ID: $(subscriptionId)
+
+          # Terraform needs these to authenticate and access Docker Hub
           dockerhub_username: $(dockerhub_username)
           dockerhub_password: $(dockerhub_password)
+
+
 
 # ──────────────────────────────────────────────
 # 2️⃣ Build Stage — Build & Push Docker Image
