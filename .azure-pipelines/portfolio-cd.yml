@@ -3,161 +3,144 @@ trigger:
     include:
       - main
 
-pool:
-  vmImage: ubuntu-latest
-
 variables:
-  resourceGroup: portfolio-rg
-  location: canadacentral
-  appServiceName: bensonibeabuchiportfolio
-  appServicePlanName: portfolio-asplan
-  imageName: portfolio-app
-  storageAccountName: portfolioterraformsa
-  containerName: tfstate
+  imageName: "bensonibeabuchi/portfolio"
+  dockerfilePath: "Dockerfile"
+  tag: "$(Build.BuildId)"
+
+  resourceGroup: "portfolio-rg"
+  storageAccountName: "portfoliostatestorage"
+  containerName: "tfstate"
+  location: "canadacentral"
+  appServicePlanName: "portfolio-appserviceplan"
+  appServiceName: "portfolio-webapp"
 
 stages:
-# ──────────────────────────────────────────────
-# 0️⃣ Bootstrap Stage — Ensure Backend Exists
-# ──────────────────────────────────────────────
-- stage: Bootstrap
-  displayName: "Ensure Terraform backend exists"
-  jobs:
-  - job: createBackend
-    displayName: "Check/Create Backend RG, Storage, Container"
-    steps:
-      - task: AzureCLI@2
-        displayName: "Bootstrap Terraform backend"
-        inputs:
-          azureSubscription: "azure-portfolio-connection"
-          scriptType: bash
-          scriptLocation: inlineScript
-          inlineScript: |
-            set -e
+  # =====================
+  # 1️⃣ Build & Push Stage
+  # =====================
+  - stage: BuildAndPush
+    displayName: "🐳 Build and Push Docker Image"
+    jobs:
+      - job: DockerBuild
+        displayName: "Build & Push Docker Image to Docker Hub"
+        pool:
+          vmImage: "ubuntu-latest"
 
-            echo "🔹 Ensuring resource group exists..."
-            az group create --name $(resourceGroup) --location $(location) --output none
+        steps:
+          - checkout: self
+            clean: true
 
-            echo "🔹 Ensuring storage account exists..."
-            if ! az storage account show --name $(storageAccountName) --resource-group $(resourceGroup) &>/dev/null; then
-              az storage account create \
-                --name $(storageAccountName) \
-                --resource-group $(resourceGroup) \
-                --location $(location) \
-                --sku Standard_LRS \
-                --kind StorageV2
-            else
-              echo "✅ Storage account $(storageAccountName) already exists."
-            fi
+          - task: Docker@2
+            displayName: "Build and Push Image"
+            inputs:
+              command: buildAndPush
+              repository: "$(imageName)"
+              dockerfile: "$(dockerfilePath)"
+              containerRegistry: "DockerHubConnection"
+              tags: |
+                latest
+                $(tag)
 
-            echo "🔹 Ensuring blob container exists..."
-            STORAGE_KEY=$(az storage account keys list --account-name $(storageAccountName) --resource-group $(resourceGroup) --query "[0].value" -o tsv)
-            if ! az storage container exists --name $(containerName) --account-name $(storageAccountName) --account-key $STORAGE_KEY | grep -q "true"; then
-              az storage container create --name $(containerName) --account-name $(storageAccountName) --account-key $STORAGE_KEY
-            else
-              echo "✅ Container $(containerName) already exists."
-            fi
+  # =====================
+  # 2️⃣ Bootstrap Backend
+  # =====================
+  - stage: Bootstrap
+    displayName: "🌱 Terraform Backend Setup"
+    dependsOn: BuildAndPush
+    jobs:
+      - job: SetupBackend
+        displayName: "Create Resource Group + Storage Account for Terraform State"
+        pool:
+          vmImage: "ubuntu-latest"
 
-# ──────────────────────────────────────────────
-# 1️⃣ Infrastructure Stage — Terraform
-# ──────────────────────────────────────────────
-- stage: Infrastructure
-  displayName: "Provision Infrastructure with Terraform"
-  dependsOn: Bootstrap
-  jobs:
-  - job: terraform
-    displayName: "Run Terraform in infra folder"
-    steps:
-      - checkout: self
+        steps:
+          - task: AzureCLI@2
+            displayName: "Create Terraform State Backend"
+            inputs:
+              azureSubscription: "azure-portfolio-connection"
+              scriptType: bash
+              scriptLocation: inlineScript
+              inlineScript: |
+                echo "🔹 Checking Azure login context..."
+                az account show
 
-      # Install Terraform
-      - script: |
-          curl -LO https://releases.hashicorp.com/terraform/1.9.7/terraform_1.9.7_linux_amd64.zip
-          unzip terraform_1.9.7_linux_amd64.zip
-          sudo mv terraform /usr/local/bin/
-          terraform -v
-        displayName: "Install Terraform"
+                echo "🔹 Creating Resource Group (if not exists)..."
+                az group create \
+                  --name $(resourceGroup) \
+                  --location $(location)
 
-      # Terraform Init, Plan, Apply
-      - task: AzureCLI@2
-        displayName: "Run Terraform to Deploy Infrastructure"
-        inputs:
-          azureSubscription: "azure-portfolio-connection"
-          scriptType: bash
-          scriptLocation: inlineScript
-          inlineScript: |
-            set -e
-            cd infra
+                echo "🔹 Creating Storage Account (if not exists)..."
+                az storage account create \
+                  --name $(storageAccountName) \
+                  --resource-group $(resourceGroup) \
+                  --location $(location) \
+                  --sku Standard_LRS \
+                  --allow-blob-public-access false
 
-            echo "🔹 Fetching Azure authentication context..."
-            az account show
+                echo "🔹 Creating Blob Container (if not exists)..."
+                az storage container create \
+                  --name $(containerName) \
+                  --account-name $(storageAccountName)
 
-            echo "🪄 Initializing Terraform backend..."
-            terraform init -reconfigure \
-              -backend-config="resource_group_name=$(resourceGroup)" \
-              -backend-config="storage_account_name=$(storageAccountName)" \
-              -backend-config="container_name=$(containerName)" \
-              -backend-config="key=terraform.tfstate"
+  # =====================
+  # 3️⃣ Terraform Deploy
+  # =====================
+  - stage: DeployInfrastructure
+    displayName: "🏗️ Terraform Init, Plan, and Apply"
+    dependsOn: Bootstrap
+    jobs:
+      - job: Terraform
+        displayName: "Terraform Apply"
+        pool:
+          vmImage: "ubuntu-latest"
 
-            echo "🧠 Running Terraform plan..."
-            terraform plan -out=tfplan \
-              -var "resource_group_name=$(resourceGroup)" \
-              -var "location=$(location)" \
-              -var "app_service_plan_name=$(appServicePlanName)" \
-              -var "app_service_name=$(appServiceName)" \
-              -var "dockerhub_username=$(dockerhub_username)" \
-              -var "dockerhub_password=$(dockerhub_password)"
+        steps:
+          - checkout: self
+            clean: true
 
-            echo "🚀 Applying Terraform..."
-            terraform apply -auto-approve tfplan
-        env:
-          ARM_USE_OIDC: true
-          ARM_CLIENT_ID: $(clientID)
-          ARM_TENANT_ID: $(tenantId)
-          ARM_SUBSCRIPTION_ID: $(subscriptionId)
-          dockerhub_username: $(dockerhub_username)
-          dockerhub_password: $(dockerhub_password)
+          - task: AzureCLI@2
+            displayName: "Run Terraform"
+            inputs:
+              azureSubscription: "azure-portfolio-connection"
+              scriptType: bash
+              scriptLocation: inlineScript
+              inlineScript: |
+                set -e
+                cd infra
 
-# ──────────────────────────────────────────────
-# 2️⃣ Build Stage — Build & Push Docker Image
-# ──────────────────────────────────────────────
-- stage: Build
-  displayName: "Build and Push Docker Image to Docker Hub"
-  dependsOn: Infrastructure
-  jobs:
-  - job: buildDocker
-    displayName: "Build & Push to Docker Hub"
-    steps:
-      - checkout: self
+                echo "🔹 Authenticating via OIDC..."
+                az account show
 
-      - script: |
-          echo "Logging into Docker Hub..."
-          echo $(dockerhub_password) | docker login -u $(dockerhub_username) --password-stdin
+                export ARM_SUBSCRIPTION_ID=$(az account show --query id -o tsv)
+                export ARM_TENANT_ID=$(az account show --query tenantId -o tsv)
+                export ARM_USE_OIDC=true
+                export ARM_CLIENT_ID=$(servicePrincipalId)
 
-          echo "Building image..."
-          docker build -t $(dockerhub_username)/$(imageName):latest .
+                echo "✅ Subscription ID: $ARM_SUBSCRIPTION_ID"
+                echo "✅ Tenant ID: $ARM_TENANT_ID"
 
-          echo "Pushing to Docker Hub..."
-          docker push $(dockerhub_username)/$(imageName):latest
-        displayName: "Build & Push Docker Image"
-        env:
-          dockerhub_username: $(dockerhub_username)
-          dockerhub_password: $(dockerhub_password)
+                echo "🪄 Initializing Terraform backend..."
+                terraform init -reconfigure \
+                  -backend-config="resource_group_name=$(resourceGroup)" \
+                  -backend-config="storage_account_name=$(storageAccountName)" \
+                  -backend-config="container_name=$(containerName)" \
+                  -backend-config="key=terraform.tfstate"
 
-# ──────────────────────────────────────────────
-# 3️⃣ Deploy Stage — Deploy to Azure App Service
-# ──────────────────────────────────────────────
-- stage: Deploy
-  displayName: "Deploy Docker Image to Azure App Service"
-  dependsOn: Build
-  jobs:
-  - job: deploy
-    displayName: "Deploy to Azure App Service"
-    steps:
-      - checkout: self
+                echo "🧠 Terraform plan..."
+                terraform plan -out=tfplan \
+                  -var "resource_group_name=$(resourceGroup)" \
+                  -var "location=$(location)" \
+                  -var "app_service_plan_name=$(appServicePlanName)" \
+                  -var "app_service_name=$(appServiceName)" \
+                  -var "dockerhub_username=$(dockerhub_username)" \
+                  -var "dockerhub_password=$(dockerhub_password)" \
+                  -var "docker_image=$(imageName):latest"
 
-      - task: AzureWebAppContainer@1
-        displayName: "Deploy container from Docker Hub"
-        inputs:
-          azureSubscription: "azure-portfolio-connection"
-          appName: "$(appServiceName)"
-          imageName: "$(dockerhub_username)/$(imageName):latest"
+                echo "🚀 Terraform apply..."
+                terraform apply -auto-approve tfplan
+            env:
+              ARM_USE_OIDC: true
+              ARM_CLIENT_ID: $(servicePrincipalId)
+              dockerhub_username: $(dockerhub_username)
+              dockerhub_password: $(dockerhub_password)
