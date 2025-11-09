@@ -14,11 +14,19 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
-  appServiceName: bensonibeabuchiportfolio
-  imageName: portfolio-app
-  dockerhub_username: bensonibeabuchi
-  dockerhub_password: $(dockerhub_password)
-  service_connection: azure-portfolio-connection
+- group: portfolio-variables
+
+- name: appServiceName
+  value: bensonibeabuchiportfolio
+
+- name: imageName
+  value: portfolio-app
+
+- name: dockerhub_username
+  value: bensonibeabuchi
+
+- name: service_connection
+  value: azure-portfolio-connection
 
 stages:
 # ──────────────────────────────────────────────
@@ -34,13 +42,13 @@ stages:
 
       - script: |
           echo "Logging into Docker Hub..."
-          echo $(dockerhub_password) | docker login -u $(dockerhub_username) --password-stdin
+          echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
 
           echo "Building image..."
-          docker build -t $(dockerhub_username)/$(imageName):latest .
+          docker build -t "$DOCKERHUB_USERNAME/$(imageName):latest" .
 
           echo "Pushing to Docker Hub..."
-          docker push $(dockerhub_username)/$(imageName):latest
+          docker push "$DOCKERHUB_USERNAME/$(imageName):latest"
         displayName: "Build & Push Docker Image"
         env:
           dockerhub_username: $(dockerhub_username)
@@ -61,6 +69,6 @@ stages:
       - task: AzureWebAppContainer@1
         displayName: "Deploy container from Docker Hub"
         inputs:
-          azureSubscription: "azure-portfolio-connection"
+          azureSubscription: "$(service_connection)"
           appName: "$(appServiceName)"
           imageName: "$(dockerhub_username)/$(imageName):latest"
