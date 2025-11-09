@@ -17,16 +17,16 @@ variables:
 
 stages:
 # ──────────────────────────────────────────────
-# 0️⃣ Bootstrap Stage (ensure Terraform backend exists)
+# 0️⃣ Bootstrap Stage — Ensure Backend Exists
 # ──────────────────────────────────────────────
 - stage: Bootstrap
   displayName: "Ensure Terraform backend exists"
   jobs:
   - job: createBackend
-    displayName: "Create backend resources if missing"
+    displayName: "Check/Create Backend RG, Storage, Container"
     steps:
       - task: AzureCLI@2
-        displayName: "Check/Create Backend RG, Storage, Container"
+        displayName: "Bootstrap Terraform backend"
         inputs:
           azureSubscription: "azure-portfolio-connection"
           scriptType: bash
@@ -46,7 +46,7 @@ stages:
                 --sku Standard_LRS \
                 --kind StorageV2
             else
-              echo "Storage account $(storageAccountName) already exists."
+              echo "✅ Storage account $(storageAccountName) already exists."
             fi
 
             echo "🔹 Ensuring blob container exists..."
@@ -54,11 +54,11 @@ stages:
             if ! az storage container exists --name $(containerName) --account-name $(storageAccountName) --account-key $STORAGE_KEY | grep -q "true"; then
               az storage container create --name $(containerName) --account-name $(storageAccountName) --account-key $STORAGE_KEY
             else
-              echo "Container $(containerName) already exists."
+              echo "✅ Container $(containerName) already exists."
             fi
 
 # ──────────────────────────────────────────────
-# 1️⃣ Infrastructure Stage (Terraform)
+# 1️⃣ Infrastructure Stage — Terraform
 # ──────────────────────────────────────────────
 - stage: Infrastructure
   displayName: "Provision Infrastructure with Terraform"
@@ -110,16 +110,15 @@ stages:
             echo "🚀 Applying Terraform..."
             terraform apply -auto-approve tfplan
         env:
+          ARM_USE_OIDC: true
+          ARM_CLIENT_ID: $(ARM_CLIENT_ID)
+          ARM_TENANT_ID: $(ARM_TENANT_ID)
+          ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
           dockerhub_username: $(dockerhub_username)
           dockerhub_password: $(dockerhub_password)
-          ARM_CLIENT_ID: $(servicePrincipalId)
-          ARM_CLIENT_SECRET: $(servicePrincipalKey)
-          ARM_SUBSCRIPTION_ID: $(subscriptionId)
-          ARM_TENANT_ID: $(tenantId)
-          ARM_USE_MSI: false
 
 # ──────────────────────────────────────────────
-# 2️⃣ Build & Push Docker Image (Docker Hub)
+# 2️⃣ Build Stage — Build & Push Docker Image
 # ──────────────────────────────────────────────
 - stage: Build
   displayName: "Build and Push Docker Image to Docker Hub"
@@ -145,7 +144,7 @@ stages:
           dockerhub_password: $(dockerhub_password)
 
 # ──────────────────────────────────────────────
-# 3️⃣ Deploy Stage
+# 3️⃣ Deploy Stage — Deploy to Azure App Service
 # ──────────────────────────────────────────────
 - stage: Deploy
   displayName: "Deploy Docker Image to Azure App Service"
