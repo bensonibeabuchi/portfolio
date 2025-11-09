@@ -77,49 +77,54 @@ stages:
           terraform -v
         displayName: "Install Terraform"
 
-      # Terraform Init, Plan, Apply (using OIDC authentication)
-      - task: AzureCLI@2
-        displayName: "Run Terraform to Deploy Infrastructure"
+      # ✅ Run Terraform directly using OIDC environment variables (no AzureCLI@2)
+      - task: Bash@3
+        displayName: "Run Terraform to Deploy Infrastructure (OIDC)"
         inputs:
-          azureSubscription: "azure-portfolio-connection"
-          scriptType: bash
-          scriptLocation: inlineScript
-          inlineScript: |
+          targetType: 'inline'
+          script: |
             set -e
             cd infra
 
-            echo "🔹 Fetching Azure authentication context..."
-            az account show
+            echo "🔹 Using OIDC authentication with Service Principal..."
+            echo "ARM_CLIENT_ID=$ARM_CLIENT_ID"
+            echo "ARM_TENANT_ID=$ARM_TENANT_ID"
+            echo "ARM_USE_OIDC=$ARM_USE_OIDC"
 
             echo "🪄 Initializing Terraform backend..."
             terraform init -reconfigure \
-              -backend-config="resource_group_name=$(resourceGroup)" \
-              -backend-config="storage_account_name=$(storageAccountName)" \
-              -backend-config="container_name=$(containerName)" \
+              -backend-config="resource_group_name=$resourceGroup" \
+              -backend-config="storage_account_name=$storageAccountName" \
+              -backend-config="container_name=$containerName" \
               -backend-config="key=terraform.tfstate"
 
             echo "🧠 Running Terraform plan..."
             terraform plan -out=tfplan \
-              -var "resource_group_name=$(resourceGroup)" \
-              -var "location=$(location)" \
-              -var "app_service_plan_name=$(appServicePlanName)" \
-              -var "app_service_name=$(appServiceName)" \
-              -var "dockerhub_username=$(dockerhub_username)" \
-              -var "dockerhub_password=$(dockerhub_password)"
+              -var "resource_group_name=$resourceGroup" \
+              -var "location=$location" \
+              -var "app_service_plan_name=$appServicePlanName" \
+              -var "app_service_name=$appServiceName" \
+              -var "dockerhub_username=$dockerhub_username" \
+              -var "dockerhub_password=$dockerhub_password"
 
             echo "🚀 Applying Terraform..."
             terraform apply -auto-approve tfplan
 
         env:
-          # ✅ Use OIDC-based authentication
+          # 🔑 These variables are automatically injected by Azure DevOps’ OIDC workflow
           ARM_USE_OIDC: true
           ARM_CLIENT_ID: $(clientID)
           ARM_TENANT_ID: $(tenantId)
-
-          # Terraform needs these to authenticate and access Docker Hub
+          ARM_SUBSCRIPTION_ID: $(subscriptionId)
+          # Terraform vars
+          resourceGroup: $(resourceGroup)
+          location: $(location)
+          appServicePlanName: $(appServicePlanName)
+          appServiceName: $(appServiceName)
+          storageAccountName: $(storageAccountName)
+          containerName: $(containerName)
           dockerhub_username: $(dockerhub_username)
           dockerhub_password: $(dockerhub_password)
-
 
 
 # ──────────────────────────────────────────────
