@@ -111,9 +111,9 @@ stages:
             terraform apply -auto-approve tfplan
         env:
           ARM_USE_OIDC: true
-          ARM_CLIENT_ID: $(ARM_CLIENT_ID)
-          ARM_TENANT_ID: $(ARM_TENANT_ID)
-          ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
+          ARM_CLIENT_ID: $(servicePrincipalId)
+          ARM_TENANT_ID: $(tenantId)
+          ARM_SUBSCRIPTION_ID: $(subscriptionId)
           dockerhub_username: $(dockerhub_username)
           dockerhub_password: $(dockerhub_password)
 
