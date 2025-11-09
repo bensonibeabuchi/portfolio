@@ -3,6 +3,11 @@ trigger:
 
 variables:
 - group: portfolio-variables
+  appServiceName: bensonibeabuchiportfolio
+  imageName: portfolio-app
+  dockerhub_username: bensonibeabuchi
+  dockerhub_password: $(dockerhub_password)
+  service_connection: azure-portfolio-connection
 
 
 pool:
@@ -62,6 +67,3 @@ stages:
 
           echo "⚙️ Applying Terraform..."
           terraform apply -auto-approve tfplan
-        # env:
-        #   TF_VAR_dockerhub_username: $(dockerhub_username)
-        #   TF_VAR_dockerhub_password: $(dockerhub_password)
