@@ -3,8 +3,6 @@ trigger:
 
 variables:
 - group: portfolio-variables
-  dockerhub_password: $(dockerhub_password)
-
 
 pool:
   vmImage: ubuntu-latest
@@ -40,11 +38,8 @@ stages:
             -backend-config="container_name=tfstate" \
             -backend-config="key=terraform.tfstate"
 
-            echo "🪄 Running Terraform Plan..."
-            terraform plan -out=tfplan \
-              -var "dockerhub_username=$(dockerhub_username)" \
-              -var "dockerhub_password=$(dockerhub_password)" \
-              -var-file=terraform.tfvars
+          echo "🪄 Running Terraform Plan..."
+          terraform plan -out=tfplan -var-file=terraform.tfvars
 
           # Import existing resource group if not managed
           terraform state list | grep azurerm_resource_group.rg
@@ -58,8 +53,9 @@ stages:
           echo "🧩 Validating Terraform configuration..."
           terraform validate
 
-          echo "🪄 Running Terraform Plan..."
-          terraform plan -out=tfplan -var-file=terraform.tfvars
-
           echo "⚙️ Applying Terraform..."
           terraform apply -auto-approve tfplan
+      env:
+        TF_VAR_dockerhub_username: $(dockerhub_username)
+        TF_VAR_dockerhub_password: $(dockerhub_password)
+
