@@ -64,3 +64,6 @@ stages:
 
           echo "⚙️ Applying Terraform..."
           terraform apply -auto-approve tfplan
+        env:
+          TF_VAR_dockerhub_username: $(dockerhub_username)
+          TF_VAR_dockerhub_password: $(dockerhub_password)
