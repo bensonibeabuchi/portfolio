@@ -1,11 +1,11 @@
-# 🚀 Benson Portfolio — Dockerized Deployment on Azure
+# Benson Portfolio — Dockerized Deployment on Azure
 
 This repository contains my **portfolio web application**, containerized using **Docker** and deployed to **Azure App Service** via **CI/CD pipelines** in **Azure DevOps**.  
 Infrastructure was provisioned using **Terraform (Infrastructure as Code)**.
 
 ---
 
-## 🧱 Tech Stack
+## Tech Stack
 
 - **Frontend:** Next.js  
 - **Containerization:** Docker  
@@ -15,7 +15,7 @@ Infrastructure was provisioned using **Terraform (Infrastructure as Code)**.
 
 ---
 
-## ⚙️ Steps Taken
+## Steps Taken
 
 ### 1️⃣ Dockerized the Application
 
@@ -33,17 +33,18 @@ docker run -p 3000:3000 portfolio
 
 ```
 
-This container image encapsulates all dependencies (Next.js + Django backend), ensuring platform-agnostic deployment.
+This container image encapsulates all dependencies, ensuring platform-agnostic deployment.
 
-2️⃣ Infrastructure Deployment with Terraform
+
+
+### 2️⃣ Infrastructure Deployment with Terraform
 
 I automated the creation of all necessary Azure resources using Terraform:
 
-Resource Group
 
-Azure App Service Plan
-
-Azure Web App for Containers
+- **Resource Group:**
+- **Azure App Service Plan:**
+- **Azure webApp**
 
 ```bash
 # Initialize Terraform
@@ -61,23 +62,20 @@ terraform apply -auto-approve
 
 This ensures the entire infrastructure can be replicated consistently using code.
 
-3️⃣ Continuous Integration (CI) Pipeline
+
+### 3️⃣ Continuous Integration (CI) Pipeline
 
 I configured a CI pipeline in Azure DevOps to:
 
-Check out the repository
+- **Check out the repository:**
+- **Build and test the app:**
+- **Add unit tests with Jest + Azure DevOps Test Reporting:**
+- **Build a Docker image:**
+- **Push the image to Docker Hub:**
+- **Publish the image tag for CD pipeline consumption:**
 
-Build and test the app
+# CI YAML Snippet:
 
-Add unit tests with Jest + Azure DevOps Test Reporting
-
-Build a Docker image
-
-Push the image to Docker Hub
-
-Publish the image tag for CD pipeline consumption
-
-CI YAML Snippet:
 ```bash
 trigger:
   - main
@@ -126,19 +124,17 @@ stages:
                     imageName: "$(dockerhub_username)/portfolio:latest"
 ```
 
-5️⃣ Manual Approval Gate
+### 5️⃣ Manual Approval Gate
 
 Before deployment to production, a manual approval is required via Azure DevOps Environments.
 This ensures quality control and prevents accidental production releases.
 
-Environment: production
-
-Check: Manual Approval
-
-Approver: Benson Ibeabuchi
+- **Environment:** production
+- **Check:** Manual Approval
+- **Approver:** Benson Ibeabuchi
 
 
-6️⃣ Verification and Monitoring
+### 6️⃣ Verification and Monitoring
 
 After successful deployment:
 
@@ -149,21 +145,22 @@ Checked deployment logs and endpoint accessibility
 Configured Azure Application Insights for uptime, performance, and error monitoring
 
 
-Live Demo
+# Live Demo
 
 Deployed URL: https://bensonibeabuchiportfolio.azurewebsites.net/home
-
 Docker Hub Image: dockerhub.com/bensonibeabuchi/portfolio
 
 
 
-🧩 Future Improvements
+### Future Improvements
 Set up automated monitoring alerts via Azure Monitor
 Add environment-based staging and blue-green deployment
 
 
 👤 Author
 
-Benson Ibeabuchi
+# Benson Ibeabuchi
 Surrey, BC
 ibeabuchibenson@gmail.com
+
+
