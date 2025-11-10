@@ -60,15 +60,20 @@ stages:
 - stage: Deploy
   displayName: "Deploy Docker Image to Azure App Service"
   dependsOn: Build
+  condition: succeeded()   # only if Build succeeds
   jobs:
-  - job: deploy
-    displayName: "Deploy to Azure App Service"
-    steps:
-      - checkout: self
+  - deployment: DeployToProduction
+    displayName: "Deploy to Production Environment"
+    environment: 'production'   # 👈 Must match the environment name you created
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+            - checkout: self
 
-      - task: AzureWebAppContainer@1
-        displayName: "Deploy container from Docker Hub"
-        inputs:
-          azureSubscription: "$(service_connection)"
-          appName: "$(appServiceName)"
-          imageName: "$(dockerhub_username)/$(imageName):latest"
+            - task: AzureWebAppContainer@1
+              displayName: "Deploy container from Docker Hub"
+              inputs:
+                azureSubscription: "$(service_connection)"
+                appName: "$(appServiceName)"
+                imageName: "$(dockerhub_username)/$(imageName):latest"
