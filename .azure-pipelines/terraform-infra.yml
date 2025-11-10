@@ -8,8 +8,43 @@ pool:
   vmImage: ubuntu-latest
 
 stages:
+- stage: BuildAndTest
+  displayName: 'Build & Test'
+  jobs:
+    - job: Build
+      displayName: 'Build and Run Tests'
+      pool:
+        vmImage: 'ubuntu-latest'
+      steps:
+        - checkout: self
+
+        - task: NodeTool@0
+          inputs:
+            versionSpec: '18.x'
+          displayName: 'Use Node.js 18'
+
+        - script: |
+            echo "📦 Installing dependencies..."
+            npm ci
+          displayName: 'Install dependencies'
+
+        - script: |
+            echo "🧪 Running unit tests..."
+            npm run test --if-present
+          displayName: 'Run unit tests'
+
+        - task: PublishTestResults@2
+          inputs:
+            testResultsFormat: 'JUnit'
+            testResultsFiles: '**/junit.xml'
+            failTaskOnFailedTests: true
+          condition: succeededOrFailed()
+          displayName: 'Publish test results (optional)'
+
 - stage: Terraform
   displayName: 'Terraform Infrastructure Deployment'
+  dependsOn: BuildAndTest
+  condition: succeeded()   # only if all tests pass
   jobs:
   - job: terraform
     displayName: 'Provision Infrastructure with Terraform'
