@@ -19,9 +19,7 @@ export default function Footer() {
         <Link href="https://github.com/bensonibeabuchi" target="_blank">
           <FaGithub className="h-8 w-8 mt-4" />
         </Link>
-        <Link href="https://twitter.com/BensonIbeabuchi" target="_blank">
-          <FaTwitterSquare className="h-8 w-8 mt-4" />
-        </Link>
+
       </div>
     </div>
   );

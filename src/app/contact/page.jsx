@@ -16,14 +16,14 @@ export default function About() {
             <div className="hidden md:block p-8">
               <p>I am available for exciting projects as well as potential employment opportunities. Use the form to inquire about rates and availability, or just to say hi 😊.</p>
               <div>
-                <a href="https://www.linkedin.com/in/benson-ugochukwu-ibeabuchi/" target="_blank" className="my-16 flex items-center space-x-8 ">
+                <a href="https://www.linkedin.com/in/bensonibeabuchi/" target="_blank" className="my-16 flex items-center space-x-8 ">
                   <FaLinkedin className="h-8 w-8" />
-                  <p>https://www.linkedin.com/in/benson-ugochukwu-ibeabuchi/</p>
+                  <p>LinkedIn</p>
                 </a>
 
                 <a href="https://github.com/bensonibeabuchi" target="_blank" className="my-16 flex items-center space-x-8 ">
                   <FaGithub className="h-8 w-8" />
-                  <p>https://github.com/bensonibeabuchi</p>
+                  <p>Github</p>
                 </a>
                 {/* <a href="https://twitter.com/BensonIbeabuchi" target="_blank" className="my-16 flex items-center space-x-8 ">
                   <FaTwitterSquare className="h-8 w-8" />

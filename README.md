@@ -134,6 +134,8 @@ This ensures quality control and prevents accidental production releases.
 - **Approver:** Benson Ibeabuchi
 
 
+
+
 ### 6️⃣ Verification and Monitoring
 
 After successful deployment:
@@ -145,21 +147,19 @@ Checked deployment logs and endpoint accessibility
 Configured Azure Application Insights for uptime, performance, and error monitoring
 
 
-# Live Demo
+### Live Demo
 
 Deployed URL: https://bensonibeabuchiportfolio.azurewebsites.net/home
 Docker Hub Image: dockerhub.com/bensonibeabuchi/portfolio
 
 
-
-### Future Improvements
+## Future Improvements
 Set up automated monitoring alerts via Azure Monitor
 Add environment-based staging and blue-green deployment
 
 
-👤 Author
-
-# Benson Ibeabuchi
+### Author
+#### Benson Ibeabuchi
 Surrey, BC
 ibeabuchibenson@gmail.com
 
