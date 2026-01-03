@@ -31,10 +31,11 @@ services:
       - "9090:9090"
     volumes:
       - ./config:/etc/prometheus
+      - ./config/recording_rules.yml:/etc/prometheus/recording_rules.yml
     command:
       - "--config.file=/etc/prometheus/prometheus.yml"
 
   promlens:
     image: prom/promlens
     ports:
-      - 8080:8080
+      - 8181:8181
