@@ -23,3 +23,18 @@ services:
     environment:
       - NODE_ENV=production
     command: npm start
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./config:/etc/prometheus
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+
+  promlens:
+    image: prom/promlens
+    ports:
+      - 8080:8080
